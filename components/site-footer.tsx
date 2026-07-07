@@ -1,11 +1,6 @@
-"use client"
-
 import { Send, Users } from "lucide-react"
-import { useLanguage } from "./language-provider" // <-- Подключаем хук локализации
 
 export function SiteFooter() {
-  const { t } = useLanguage() // <-- Достаем переводы footer из контекста
-
   return (
     <footer className="relative border-t border-border/60">
       {/* thin neon accent line */}
@@ -15,7 +10,9 @@ export function SiteFooter() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Left — legal notice */}
           <p className="text-xs leading-relaxed text-muted-foreground lg:col-span-2 lg:max-w-3xl">
-            {t.footer.legal}
+            © 2026 TransferCS. Все права защищены. Все данные являются аналитической
+            оценкой и не являются официальной информацией. Логотипы и изображения
+            принадлежат их правообладателям.
           </p>
 
           {/* Right — contacts + active users с выравниванием по сетке */}
@@ -25,7 +22,7 @@ export function SiteFooter() {
             <div className="grid grid-cols-[auto_1fr] items-center gap-x-2 text-sm text-muted-foreground">
               <div className="flex w-48 items-center gap-2">
                 <Send className="size-4 text-primary/70" />
-                <span>{t.footer.devContacts}</span>
+                <span>Контакты разработчика:</span>
               </div>
               <div>
                 <a
@@ -45,7 +42,7 @@ export function SiteFooter() {
             <div className="grid grid-cols-[auto_1fr] items-center gap-x-2 text-sm text-muted-foreground">
               <div className="flex w-48 items-center gap-2">
                 <Users className="size-4 text-primary" />
-                <span>{t.footer.activeUsers}</span>
+                <span>Активные пользователи:</span>
               </div>
               <div>
                 <span className="inline-flex items-center gap-1.5 font-mono font-semibold text-foreground">
