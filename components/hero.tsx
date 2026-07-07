@@ -16,6 +16,12 @@ export function Hero() {
           <TopTeams />
         </div>
 
+        {/* CENTER — advertising copy */}
+        <div className="order-1 flex flex-col justify-center lg:order-2 lg:col-span-5">
+          <span className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+            <Sparkles className="size-3.5" />
+            Аналитика киберспорта · CS
+          </span>
 
           <h1 className="text-balance font-display text-5xl font-bold uppercase leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
             Узнай реальную
@@ -70,6 +76,11 @@ export function Hero() {
             {/* orange neon glow radiating from player */}
             <div className="pointer-events-none absolute inset-0 -bottom-6 rounded-full bg-primary/25 blur-[90px]" />
 
+            {/* "most expensive" tag */}
+            <div className="absolute left-2 top-2 z-10 inline-flex items-center gap-1.5 rounded-full border border-primary/60 bg-background/70 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-primary backdrop-blur-md">
+              <Sparkles className="size-3" />
+              Самый дорогой игрок
+            </div>
 
             {/* player image with neon outline emanating from the silhouette */}
             <div className="relative -rotate-3">
