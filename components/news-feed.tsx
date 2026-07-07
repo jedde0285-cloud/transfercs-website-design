@@ -108,7 +108,7 @@ export function NewsFeed() {
                 <button
                   type="button"
                   onClick={() => removeFilter(key)}
-                  className="text-rose-500/80 hover:text-rose-500 transition-colors ml-0.5 p-0.5"
+                  className="text-muted-foreground/60 hover:text-rose-500 transition-colors ml-0.5 p-0.5"
                   aria-label="Remove filter"
                 >
                   <X className="size-3" />
