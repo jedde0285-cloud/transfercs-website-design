@@ -18,9 +18,6 @@ export function Hero() {
 
         {/* CENTER — advertising copy */}
         <div className="order-1 flex flex-col justify-center lg:order-2 lg:col-span-5">
-          <span className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
-            <Sparkles className="size-3.5" />
-          </span>
 
           <h1 className="text-balance font-display text-5xl font-bold uppercase leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
             Узнай реальную
