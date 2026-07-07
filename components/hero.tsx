@@ -27,7 +27,7 @@ export function Hero() {
 
           <p className="mt-6 max-w-md text-pretty leading-relaxed text-muted-foreground">
             Мы рассчитываем трансферную стоимость киберспортсменов на основе
-            статистики, формы и рыночных трендов. Оцени любого игрока за секунды.
+            статистики, формы и рыночных трендов. Узнай, сколько стоит любимый игрок.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
