@@ -92,11 +92,11 @@ export function Hero() {
                 <div className="flex items-center gap-2">
                   <span className="size-2 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary))]" />
                   <span className="font-display text-2xl font-bold uppercase tracking-wide">
-                    donk
+                    flameZ
                   </span>
                 </div>
                 <div className="mt-0.5 text-xs uppercase tracking-wider text-muted-foreground">
-                  Team Spirit · Rifler
+                  Team Vitality · Rifler
                 </div>
               </div>
               <div className="text-right">
