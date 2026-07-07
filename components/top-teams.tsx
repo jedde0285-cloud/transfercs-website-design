@@ -18,7 +18,7 @@ const teams: Team[] = [
 export function TopTeams() {
   return (
     <div className="w-full rounded-xl border border-border/70 bg-card/60 p-5 backdrop-blur-sm">
-      <div className="mb-4 flex items-center justify-between">
+      <div className="mb-4 flex items-center justify-between px-1">
         <h2 className="font-display text-lg font-bold uppercase tracking-wide">
           Топ-5 команд
         </h2>
@@ -31,7 +31,7 @@ export function TopTeams() {
         {teams.map((team) => (
           <li
             key={team.rank}
-            className="flex items-center gap-3 py-3 transition-colors hover:bg-secondary/40"
+            className="flex items-center gap-3 py-3 px-1 transition-colors hover:bg-secondary/40 rounded-lg"
           >
             <span
               className={`flex size-7 shrink-0 items-center justify-center rounded-md font-mono text-sm font-bold ${
@@ -47,7 +47,7 @@ export function TopTeams() {
               {team.value}
             </span>
             <span
-              className={`flex w-14 items-center justify-end gap-0.5 font-mono text-xs ${
+              className={`flex w-16 shrink-0 items-center justify-end gap-1 pr-1 font-mono text-xs ${
                 team.change >= 0 ? "text-primary" : "text-destructive"
               }`}
             >
@@ -56,7 +56,7 @@ export function TopTeams() {
               ) : (
                 <TrendingDown className="size-3" />
               )}
-              {Math.abs(team.change)}%
+              {team.change >= 0 ? "+" : "-"}{Math.abs(team.change)}%
             </span>
           </li>
         ))}
