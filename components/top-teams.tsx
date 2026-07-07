@@ -25,20 +25,20 @@ export function TopTeams() {
     <div className="w-full rounded-xl border border-border/70 bg-card/60 p-5 backdrop-blur-sm relative overflow-visible">
       
       {/* Трофей Кельна (Cologne) — Левый верхний угол под небольшим наклоном влево */}
-      <div className="absolute -top-5 -left-5 pointer-events-none select-none z-20">
+      <div className="absolute -top-7 -left-7 pointer-events-none select-none z-20">
         <img 
           src="/images/cologne.webp" 
           alt="Cologne Trophy" 
-          className="size-14 object-contain opacity-85 -rotate-12 drop-shadow-[0_0_8px_hsl(var(--primary)/0.3)]" 
+          className="size-16 object-contain opacity-85 -rotate-12 drop-shadow-[0_0_8px_hsl(var(--primary)/0.3)]" 
         />
       </div>
 
       {/* Трофей Мейджора (PGL Cluj-Napoca) — Правый нижний угол под небольшим наклоном вправо */}
-      <div className="absolute -bottom-5 -right-5 pointer-events-none select-none z-20">
+      <div className="absolute -bottom-7 -right-7 pointer-events-none select-none z-20">
         <img 
           src="/images/pglclujnapoca.webp" 
           alt="PGL Cluj Trophy" 
-          className="size-13 object-contain opacity-85 rotate-12 drop-shadow-[0_0_8px_hsl(var(--primary)/0.3)]" 
+          className="size-16 object-contain opacity-85 rotate-12 drop-shadow-[0_0_8px_hsl(var(--primary)/0.3)]" 
         />
       </div>
 
