@@ -74,11 +74,12 @@ export function Hero() {
 
             {/* player image with neon outline emanating from the silhouette */}
 
-            <div className="absolute left-1/2 top-[68%] z-10 -translate-x-1/2 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold uppercase tracking-wide text-black shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
-  <TrendingUp className="size-4 text-black" />
-  Прорыв сезона
+            <div className="flex justify-center">
+  <div className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-black shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+    <TrendingUp className="size-3.5 text-black" />
+    Прорыв сезона
+  </div>
 </div>
-
             <div className="relative">
               <Image
                 src="/images/LUQi5dX9boyO0uDadUGht5.webp"
