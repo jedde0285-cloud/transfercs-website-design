@@ -90,13 +90,13 @@ export function NewsFeed() {
   return (
     <div className="relative mx-auto max-w-xl px-4 py-10 sm:px-6 lg:py-14 z-10">
       
-           {/* Блок заголовка и фильтров — ИСПРАВЛЕННЫЙ ВАРИАНТ */}
-      <div className="mb-6 border-b border-border/60 bg-[#121212]/90 p-5 rounded-xl border border-primary/20 shadow-[0_0_20px_rgba(255,90,0,0.03)] flex flex-wrap items-center justify-between gap-4">
-        <h1 className="font-display text-xl font-bold uppercase tracking-tight text-foreground sm:text-2xl">
+      {/* Блок заголовка и фильтров */}
+      <div className="mb-6 border-b border-border/60 bg-[#121212]/90 p-5 rounded-xl border border-primary/20 shadow-[0_0_20px_rgba(255,90,0,0.03)]">
+        <h1 className="font-display text-2xl font-black uppercase tracking-wider text-white">
           {lang === "ru" ? "Лента новостей" : "News Feed"}
         </h1>
 
-        <div className="flex flex-wrap items-center gap-2 relative">
+        <div className="mt-4 flex flex-wrap items-center gap-2 relative">
           {activeFilters.map((key) => {
             const cat = CATEGORIES[key as keyof typeof CATEGORIES]
             return (
@@ -129,7 +129,7 @@ export function NewsFeed() {
               </button>
 
               {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 z-50 flex flex-col gap-1 rounded-md border border-primary/40 bg-[#161616] p-1.5 shadow-xl min-w-[140px] box-glow">
+                <div className="absolute left-0 mt-2 z-50 flex flex-col gap-1 rounded-md border border-primary/40 bg-[#161616] p-1.5 shadow-xl min-w-[140px] box-glow">
                   {availableToAdd.map((key) => {
                     const cat = CATEGORIES[key as keyof typeof CATEGORIES]
                     return (
