@@ -23,7 +23,7 @@ export function TopTeams() {
           Топ-5 команд
         </h2>
         <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
-          Сейчас
+          30.06.2026
         </span>
       </div>
 
