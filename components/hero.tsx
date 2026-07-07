@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { ArrowRight, Calculator, Activity, TrendingUp } from "lucide-react"
-import { TopTeams } from "@/components/top-teams"
+import { TopTeams } from "./top-teams"
 import { useLanguage } from "./language-provider" // <-- Импортируем хук языка
 
 export function Hero() {
