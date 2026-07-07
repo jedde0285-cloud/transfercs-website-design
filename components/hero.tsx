@@ -73,14 +73,6 @@ export function Hero() {
             <div className="pointer-events-none absolute inset-0 -bottom-6 rounded-full bg-primary/25 blur-[90px]" />
 
             {/* player image with neon outline emanating from the silhouette */}
-
-            <div className="relative z-10 -mt-2 mb-3 flex justify-center">
-              <div className="inline-flex items-center gap-1.5 rounded-md bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-black shadow-lg shadow-primary/20">
-                <TrendingUp className="size-3 text-black" />
-                Прорыв сезона
-              </div>
-            </div>
-
             <div className="relative">
               <Image
                 src="/images/LUQi5dX9boyO0uDadUGht5.webp"
@@ -92,6 +84,14 @@ export function Hero() {
               />
               {/* bottom fade into background */}
               <div className="pointer-events-none absolute inset-x-0 -bottom-1 z-[2] h-24 bg-gradient-to-t from-background to-transparent" />
+            </div>
+
+            {/* Прорыв сезона — теперь строго под игроком и центрирован */}
+            <div className="relative z-10 -mt-2 mb-3 flex justify-center">
+              <div className="inline-flex items-center gap-1.5 rounded-md bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-black shadow-lg shadow-primary/20">
+                <TrendingUp className="size-3 text-black" />
+                Прорыв сезона
+              </div>
             </div>
 
             {/* nickname + price info UNDER the player */}
