@@ -1,15 +1,18 @@
+import { LanguageProvider } from "@/components/language-provider"
 import { SiteHeader } from "@/components/site-header"
 import { Hero } from "@/components/hero"
 import { SiteFooter } from "@/components/site-footer"
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <SiteHeader />
-      <main className="flex-1">
-        <Hero />
-      </main>
-      <SiteFooter />
-    </div>
+    <LanguageProvider>
+      <div className="flex min-h-screen flex-col bg-background">
+        <SiteHeader />
+        <main className="flex-1">
+          <Hero />
+        </main>
+        <SiteFooter />
+      </div>
+    </LanguageProvider>
   )
 }
