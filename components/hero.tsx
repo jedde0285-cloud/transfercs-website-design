@@ -50,9 +50,9 @@ export function Hero() {
           {/* stats row */}
           <div className="mt-10 grid max-w-md grid-cols-3 gap-4 border-t border-border/60 pt-6">
             {[
-              { value: "1 200+", label: "Игроков" },
-              { value: "180+", label: "Команд" },
-              { value: "AI", label: "Уникальная модель расчёта" },
+              { value: "150+", label: "Игроков" },
+              { value: "30+", label: "Команд" },
+              { value: "ТЕХНОЛОГИЯ", label: "Уникальная модель расчёта" },
             ].map((s) => (
               <div key={s.label}>
                 <div className="font-display text-2xl font-bold text-foreground">
@@ -72,14 +72,8 @@ export function Hero() {
             {/* orange neon glow radiating from player */}
             <div className="pointer-events-none absolute inset-0 -bottom-6 rounded-full bg-primary/25 blur-[90px]" />
 
-            {/* "most expensive" tag */}
-            <div className="absolute left-2 top-2 z-10 inline-flex items-center gap-1.5 rounded-full border border-primary/60 bg-background/70 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-primary backdrop-blur-md">
-              <Sparkles className="size-3" />
-              Самый дорогой игрок
-            </div>
-
             {/* player image with neon outline emanating from the silhouette */}
-            <div className="relative -rotate-3">
+            <div className="relative">
               <Image
                 src="/images/donk.webp"
                 alt="Профессиональный игрок donk в форме BetBoom"
