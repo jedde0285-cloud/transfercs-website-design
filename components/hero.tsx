@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image"
 import { ArrowRight, Calculator, Activity, TrendingUp } from "lucide-react"
 import { TopTeams } from "@/components/top-teams"
