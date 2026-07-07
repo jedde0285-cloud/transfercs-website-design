@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useLanguage } from "@/context/LanguageContext" // <-- Поправь путь к контексту, если он другой
+import { useLanguage } from "./LanguageContext"
 import { Menu, X, Crosshair, Shield, User, Info, Newspaper } from "lucide-react"
 
 export function SiteHeader() {
