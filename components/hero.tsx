@@ -56,7 +56,7 @@ export function Hero() {
             {[
               { value: "1 200+", label: "Игроков" },
               { value: "180+", label: "Команд" },
-              { value: "24/7", label: "Обновление" },
+              { value: "AI", label: "Уникальная модель расчёта" },
             ].map((s) => (
               <div key={s.label}>
                 <div className="font-display text-2xl font-bold text-foreground">
@@ -70,71 +70,53 @@ export function Hero() {
           </div>
         </div>
 
-        {/* RIGHT — player with "Расчёт" badge */}
-        <div className="order-3 lg:col-span-4">
-          <div className="relative mx-auto max-w-md">
-            {/* orange neon glow behind player */}
-            <div className="pointer-events-none absolute -inset-4 rounded-[2rem] bg-primary/25 blur-2xl" />
-            <div className="pointer-events-none absolute -inset-1 rounded-[1.75rem] bg-gradient-to-b from-primary/40 to-primary/10 blur-md" />
+        {/* RIGHT — player */}
+        <div className="order-3 flex flex-col justify-end lg:col-span-4">
+          <div className="relative mx-auto w-full max-w-lg">
+            {/* orange neon glow radiating from player */}
+            <div className="pointer-events-none absolute inset-0 -bottom-6 rounded-full bg-primary/25 blur-[90px]" />
 
-            {/* neon frame */}
-            <div className="relative overflow-hidden rounded-3xl border-2 border-primary/70 bg-gradient-to-b from-primary/10 to-transparent shadow-[0_0_40px_-4px_hsl(var(--primary)/0.7),inset_0_0_30px_-8px_hsl(var(--primary)/0.5)]">
+            {/* "most expensive" tag */}
+            <div className="absolute left-2 top-2 z-10 inline-flex items-center gap-1.5 rounded-full border border-primary/60 bg-background/70 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-primary backdrop-blur-md">
+              <Sparkles className="size-3" />
+              Самый дорогой игрок
+            </div>
+
+            {/* player image with neon outline emanating from the silhouette */}
+            <div className="relative -rotate-3">
               <Image
                 src="/images/donk.webp"
                 alt="Профессиональный игрок donk в форме BetBoom"
-                width={800}
-                height={800}
+                width={900}
+                height={900}
                 priority
-                className="h-auto w-full object-cover"
+                className="relative z-[1] h-auto w-full scale-110 object-contain [filter:drop-shadow(0_0_14px_hsl(var(--primary)/0.9))_drop-shadow(0_0_36px_hsl(var(--primary)/0.6))]"
               />
-              {/* bottom fade */}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background via-background/70 to-transparent" />
-
-              {/* "most expensive" tag */}
-              <div className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-primary/60 bg-background/80 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-primary backdrop-blur-md">
-                <Sparkles className="size-3" />
-                Самый дорогой игрок
-              </div>
-
-              {/* player info + price at the bottom */}
-              <div className="absolute inset-x-4 bottom-4 rounded-xl border border-primary/40 bg-background/75 p-4 backdrop-blur-md">
-                <div className="flex items-center justify-between gap-3">
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="size-2 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary))]" />
-                      <span className="font-display text-2xl font-bold uppercase tracking-wide">
-                        donk
-                      </span>
-                    </div>
-                    <div className="mt-0.5 text-xs uppercase tracking-wider text-muted-foreground">
-                      Team Spirit · Rifler
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="font-display text-2xl font-bold text-primary text-glow">
-                      $1.9M
-                    </div>
-                    <div className="flex items-center justify-end gap-1 text-xs text-primary">
-                      <Activity className="size-3" />
-                      +12.4%
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {/* bottom fade into background */}
+              <div className="pointer-events-none absolute inset-x-0 -bottom-1 z-[2] h-24 bg-gradient-to-t from-background to-transparent" />
             </div>
 
-            {/* "Расчёт" floating badge over player */}
-            <div className="absolute -right-3 top-6 rotate-3 rounded-xl border border-primary/50 bg-background/90 px-4 py-3 backdrop-blur-md box-glow sm:-right-6">
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary">
-                <Calculator className="size-3.5" />
-                Расчёт
+            {/* nickname + price info UNDER the player */}
+            <div className="relative z-10 -mt-6 flex items-center justify-between gap-3 rounded-xl border border-primary/40 bg-background/75 px-5 py-3 backdrop-blur-md box-glow">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="size-2 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary))]" />
+                  <span className="font-display text-2xl font-bold uppercase tracking-wide">
+                    donk
+                  </span>
+                </div>
+                <div className="mt-0.5 text-xs uppercase tracking-wider text-muted-foreground">
+                  Team Spirit · Rifler
+                </div>
               </div>
-              <div className="mt-1 font-display text-2xl font-bold text-foreground">
-                $1.9M
-              </div>
-              <div className="flex items-center gap-1 text-xs text-primary">
-                <Activity className="size-3" />
-                +12.4% за месяц
+              <div className="text-right">
+                <div className="font-display text-2xl font-bold text-primary text-glow">
+                  $1.9M
+                </div>
+                <div className="flex items-center justify-end gap-1 text-xs text-primary">
+                  <Activity className="size-3" />
+                  +12.4%
+                </div>
               </div>
             </div>
           </div>
