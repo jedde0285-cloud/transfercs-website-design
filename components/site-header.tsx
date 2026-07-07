@@ -22,11 +22,11 @@ export function SiteHeader() {
             <a
               key={item.label}
               href={item.href}
-              className="group relative flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground"
+              className="group relative flex items-center gap-2 rounded-md px-4 py-2 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:text-primary"
             >
-              <item.icon className="size-4 text-primary/70 transition-colors group-hover:text-primary" />
+              <item.icon className="size-4 text-primary transition-colors group-hover:scale-105" />
               {item.label}
-              <span className="absolute inset-x-3 -bottom-px h-px scale-x-0 bg-primary transition-transform duration-300 group-hover:scale-x-100" />
+              <span className="absolute inset-x-4 -bottom-px h-0.5 scale-x-0 bg-primary transition-transform duration-300 group-hover:scale-x-100" />
             </a>
           ))}
         </nav>
@@ -61,9 +61,9 @@ export function SiteHeader() {
               key={item.label}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium uppercase tracking-wide text-muted-foreground hover:bg-secondary hover:text-foreground"
+              className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold uppercase tracking-wide text-white hover:bg-secondary hover:text-primary"
             >
-              <item.icon className="size-4 text-primary/70" />
+              <item.icon className="size-4 text-primary" />
               {item.label}
             </a>
           ))}
