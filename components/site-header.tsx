@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useLanguage } from "./LanguageContext"
+import { useLanguage } from "./language-provider"
 import { Menu, X, Crosshair, Shield, User, Info, Newspaper } from "lucide-react"
 
 export function SiteHeader() {
