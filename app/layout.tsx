@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Inter, Oswald, Geist_Mono } from 'next/font/google'
+import { LanguageProvider } from '@/components/language-provider' // <-- ДОБАВИЛИ ИМПОРТ
 import './globals.css'
 
 const inter = Inter({
@@ -41,7 +42,10 @@ export default function RootLayout({
       className={`dark bg-background ${inter.variable} ${oswald.variable} ${geistMono.variable}`}
     >
       <body className="font-sans antialiased">
-        {children}
+        {/* ОБЕРНУЛИ ВСЁ ПРИЛОЖЕНИЕ В ПРОВАЙДЕР ЯЗЫКА */}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
