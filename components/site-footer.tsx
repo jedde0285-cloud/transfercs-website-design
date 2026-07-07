@@ -15,33 +15,46 @@ export function SiteFooter() {
             принадлежат их правообладателям.
           </p>
 
-          {/* Right — contacts + active users */}
+          {/* Right — contacts + active users с выравниванием по сетке */}
           <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <span>Контакты разработчика:</span>
-              <a
-                href="https://t.me/jedde1"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Telegram разработчика"
-                className="inline-flex items-center gap-1.5 rounded-md bg-primary/10 px-2.5 py-1 font-medium text-primary transition-colors hover:bg-primary/20"
-              >
-                <Send className="size-4" />
-                @jedde1
-              </a>
+            
+            {/* Строка 1: Контакты */}
+            <div className="grid grid-cols-[auto_1fr] items-center gap-x-2 text-sm text-muted-foreground">
+              <div className="flex w-48 items-center gap-2">
+                <Send className="size-4 text-primary/70" />
+                <span>Контакты разработчика:</span>
+              </div>
+              <div>
+                <a
+                  href="https://t.me/jedde1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Telegram разработчика"
+                  className="inline-flex items-center gap-1.5 rounded-md bg-primary/10 px-2.5 py-1 font-medium text-primary transition-colors hover:bg-primary/20"
+                >
+                  <Send className="size-3.5" />
+                  @jedde1
+                </a>
+              </div>
             </div>
 
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Users className="size-4 text-primary" />
-              <span>Активные пользователи:</span>
-              <span className="inline-flex items-center gap-1.5 font-mono font-semibold text-foreground">
-                <span className="relative flex size-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-                  <span className="relative inline-flex size-2 rounded-full bg-primary" />
+            {/* Строка 2: Пользователи */}
+            <div className="grid grid-cols-[auto_1fr] items-center gap-x-2 text-sm text-muted-foreground">
+              <div className="flex w-48 items-center gap-2">
+                <Users className="size-4 text-primary" />
+                <span>Активные пользователи:</span>
+              </div>
+              <div>
+                <span className="inline-flex items-center gap-1.5 font-mono font-semibold text-foreground">
+                  <span className="relative flex size-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                    <span className="relative inline-flex size-2 rounded-full bg-primary" />
+                  </span>
+                  1 342
                 </span>
-                1 342
-              </span>
+              </div>
             </div>
+
           </div>
         </div>
 
@@ -50,7 +63,6 @@ export function SiteFooter() {
           <span className="font-display text-sm font-bold uppercase tracking-widest text-muted-foreground">
             Transfer<span className="text-primary">CS</span>
           </span>
-          {/* <-- Строка "Аналитика трансферного рынка киберспорта" УДАЛЕНА --> */}
         </div>
       </div>
     </footer>
