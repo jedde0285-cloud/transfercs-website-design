@@ -74,8 +74,7 @@ export function Hero() {
 
             {/* player image with neon outline emanating from the silhouette */}
 
-            <div className="absolute -left-4 -top-4 z-10 inline-flex items-center gap-3 rounded-xl border-2 border-primary bg-primary/80 px-6 py-3 text-sm font-black uppercase tracking-widest text-primary-foreground shadow-[0_0_40px_hsl(var(--primary)/0.8)] backdrop-blur-md transition-all duration-300 hover:scale-110 hover:shadow-[0_0_60px_hsl(var(--primary)/1)]">
-  <Rocket className="size-5 animate-pulse" />
+            <div className="absolute -left-3 -top-3 z-10 inline-flex items-center gap-2.5 rounded-lg border-2 border-primary/60 bg-primary/40 px-4 py-2 text-[11px] font-light uppercase tracking-[0.15em] text-primary-foreground shadow-[0_0_25px_hsl(var(--primary)/0.5)] backdrop-blur-md transition-all duration-300 hover:border-primary hover:bg-primary/60 hover:shadow-[0_0_45px_hsl(var(--primary)/0.8)] hover:scale-105">
   Прорыв сезона
 </div>
 
