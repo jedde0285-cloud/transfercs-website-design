@@ -8,14 +8,13 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false)
   const { lang, setLang, t } = useLanguage()
 
-  // Динамические пункты навигации из твоего словаря
   const navItems = [
-    { label: t.nav.news || "Новости", href: "#news", icon: Newspaper }, // Добавил news, если расширишь словарь
+    { label: t.nav.calc, href: "#news", icon: Newspaper }, // <-- Теперь берёт "Оценка" / "Valuation"
     { label: t.nav.teams, href: "#teams", icon: Shield },
     { label: t.nav.players, href: "#players", icon: User },
     { label: t.nav.about, href: "#about", icon: Info },
   ]
-
+  
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
