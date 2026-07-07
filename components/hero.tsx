@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { ArrowRight, Calculator, Sparkles, Activity, Rocket } from "lucide-react"
+import { ArrowRight, Calculator, Sparkles, Activity, TrendingUp } from "lucide-react"
 import { TopTeams } from "@/components/top-teams"
 
 export function Hero() {
@@ -74,7 +74,8 @@ export function Hero() {
 
             {/* player image with neon outline emanating from the silhouette */}
 
-            <div className="absolute -left-3 -top-3 z-10 inline-flex items-center gap-2.5 rounded-lg border-2 border-primary/60 bg-primary/40 px-4 py-2 text-[11px] font-light uppercase tracking-[0.15em] text-primary-foreground shadow-[0_0_25px_hsl(var(--primary)/0.5)] backdrop-blur-md transition-all duration-300 hover:border-primary hover:bg-primary/60 hover:shadow-[0_0_45px_hsl(var(--primary)/0.8)] hover:scale-105">
+            <div className="absolute left-1/2 top-[68%] z-10 -translate-x-1/2 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold uppercase tracking-wide text-black shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+  <TrendingUp className="size-4 text-black" />
   Прорыв сезона
 </div>
 
