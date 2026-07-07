@@ -1,4 +1,7 @@
+"use client"
+
 import { TrendingUp, TrendingDown } from "lucide-react"
+import { useLanguage } from "./language-provider" // <-- Импортируем хук
 
 type Team = {
   rank: number
@@ -16,11 +19,13 @@ const teams: Team[] = [
 ]
 
 export function TopTeams() {
+  const { t } = useLanguage() // <-- Подключаем перевод
+
   return (
     <div className="w-full rounded-xl border border-border/70 bg-card/60 p-5 backdrop-blur-sm">
       <div className="mb-4 flex items-center justify-between px-1">
         <h2 className="font-display text-lg font-bold uppercase tracking-wide">
-          Топ-5 команд
+          {t.topTeams.title} {/* <-- Перевод заголовка */}
         </h2>
         <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
           30.06.2026
