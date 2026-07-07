@@ -9,7 +9,7 @@ export function SiteHeader() {
   const { lang, setLang, t } = useLanguage()
 
   const navItems = [
-    { label: t.nav.calc, href: "#news", icon: Newspaper }, // <-- Теперь берёт "Оценка" / "Valuation"
+    { label: t.nav.calc, href: "/news", icon: Newspaper }, // <-- Теперь берёт "Оценка" / "Valuation"
     { label: t.nav.teams, href: "#teams", icon: Shield },
     { label: t.nav.players, href: "#players", icon: User },
     { label: t.nav.about, href: "#about", icon: Info },
