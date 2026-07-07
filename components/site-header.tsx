@@ -1,10 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { Menu, X, Crosshair, Calculator, Shield, User, Info } from "lucide-react"
+import { Menu, X, Crosshair, Calculator, Shield, User, Info, Newspaper } from "lucide-react"
 
 const navItems = [
-  { label: "Оценка", href: "#calc", icon: Calculator },
+  { label: "Новости", href: "#news", icon: Newspaper },
   { label: "Команды", href: "#teams", icon: Shield },
   { label: "Игроки", href: "#players", icon: User },
   { label: "О проекте", href: "#about", icon: Info },
