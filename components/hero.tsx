@@ -9,12 +9,15 @@ export function Hero() {
   const { lang, t } = useLanguage() // <-- Подключаем переводы
 
   // Настройка динамического массива статистики из словаря
-  const statsItems = [
+ const statsItems = [
     { value: "150+", label: t.hero.stats.players },
     { value: "30+", label: t.hero.stats.teams },
-    { value: "ТЕХНОЛОГИЯ" || "TECH", label: t.hero.stats.model }, // Используем ТЕХНОЛОГИЯ по умолчанию
+    { 
+      value: lang === "ru" ? "ТЕХНОЛОГИЯ" : "TECHNOLOGY", // <-- Теперь переводит и само слово-значение
+      label: t.hero.stats.model 
+    },
   ]
-
+  
   return (
     <section className="relative overflow-hidden">
       {/* subtle grid + glow background */}
