@@ -72,7 +72,7 @@ export function Hero() {
             {/* orange neon glow radiating from player */}
             <div className="pointer-events-none absolute inset-0 -bottom-6 rounded-full bg-primary/25 blur-[90px]" />
 
-            {/* player image with neon outline emanating from the silhouette */}
+             {/* player image with neon outline emanating from the silhouette */}
             <div className="relative">
               <Image
                 src="/images/LUQi5dX9boyO0uDadUGht5.webp"
@@ -86,36 +86,41 @@ export function Hero() {
               <div className="pointer-events-none absolute inset-x-0 -bottom-1 z-[2] h-24 bg-gradient-to-t from-background to-transparent" />
             </div>
 
-            {/* Прорыв сезона — теперь строго под игроком и центрирован */}
-            <div className="relative z-10 -mt-2 mb-3 flex justify-center">
-              <div className="inline-flex items-center gap-1.5 rounded-md bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-black shadow-lg shadow-primary/20">
-                <TrendingUp className="size-3 text-black" />
-                Прорыв сезона
-              </div>
-            </div>
-
             {/* nickname + price info UNDER the player */}
-            <div className="relative z-10 mt-0 flex items-center justify-between gap-3 rounded-xl border border-primary/40 bg-background/75 px-5 py-3 backdrop-blur-md box-glow">
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="size-2 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary))]" />
-                  <span className="font-display text-2xl font-bold uppercase tracking-wide">
-                    flameZ
-                  </span>
-                </div>
-                <div className="mt-0.5 text-xs uppercase tracking-wider text-muted-foreground">
-                  Team Vitality · Rifler
+            <div className="relative z-10 -mt-6 rounded-xl border border-primary/40 bg-background/75 p-5 backdrop-blur-md box-glow">
+              
+              {/* Прорыв сезона — теперь внутри карточки сверху */}
+              <div className="mb-4 flex justify-center">
+                <div className="inline-flex items-center gap-1.5 rounded-md bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-black shadow-lg shadow-primary/20">
+                  <TrendingUp className="size-3 text-black" />
+                  Прорыв сезона
                 </div>
               </div>
-              <div className="text-right">
-                <div className="font-display text-2xl font-bold text-primary text-glow">
-                  $1.9M
+
+              {/* Основной контент карточки */}
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="size-2 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary))]" />
+                    <span className="font-display text-2xl font-bold uppercase tracking-wide">
+                      flameZ
+                    </span>
+                  </div>
+                  <div className="mt-0.5 text-xs uppercase tracking-wider text-muted-foreground">
+                    Team Vitality · Rifler
+                  </div>
                 </div>
-                <div className="flex items-center justify-end gap-1 text-xs text-primary">
-                  <Activity className="size-3" />
-                  +12.4%
+                <div className="text-right">
+                  <div className="font-display text-2xl font-bold text-primary text-glow">
+                    $1.9M
+                  </div>
+                  <div className="flex items-center justify-end gap-1 text-xs text-primary">
+                    <Activity className="size-3" />
+                    +12.4%
+                  </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
