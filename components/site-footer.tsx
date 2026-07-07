@@ -50,9 +50,7 @@ export function SiteFooter() {
           <span className="font-display text-sm font-bold uppercase tracking-widest text-muted-foreground">
             Transfer<span className="text-primary">CS</span>
           </span>
-          <span className="text-xs uppercase tracking-wider text-muted-foreground">
-            Аналитика трансферного рынка киберспорта
-          </span>
+          {/* <-- Строка "Аналитика трансферного рынка киберспорта" УДАЛЕНА --> */}
         </div>
       </div>
     </footer>
