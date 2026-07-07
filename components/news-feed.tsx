@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useLanguage } from "./language-provider"
-import { Calendar, Heart, MessageSquare } from "lucide-react"
+import { Calendar, Heart, MessageSquare, X } from "lucide-react"
 
 type NewsPost = {
   id: number
@@ -21,8 +21,8 @@ const mockNews: NewsPost[] = [
   {
     id: 1,
     date: "07.07.2026",
-    titleRu: "xfl0ud переходит в FUT",
-    titleEn: "xfl0ud transfers to FUT",
+    titleRu: "🇹🇷 xfl0ud переходит в FUT",
+    titleEn: "🇹🇷 xfl0ud transfers to FUT",
     textRu: "Исходя из нашей модели, трансфер обошелся FUT в 342 555$.",
     textEn: "Based on our model, the transfer cost FUT $342,555.",
     image: "/images/xfl0udjoinfut.jpg",
@@ -33,10 +33,10 @@ const mockNews: NewsPost[] = [
   {
     id: 2,
     date: "05.07.2026",
-    titleRu: "HEROIC официально представили Brollan",
-    titleEn: "HEROIC officially revealed Brollan",
-    textRu: "Ценник за игрока, по нашим данным, составил 454 976$. Неясно, какую роль займет игрок в новой команде.\n\nHEROIC:\n\n— nilo\n— susp\n— MartinezSa\n— Chr1zN\n— Brollan\n\n— doto (тренер)",
-    textEn: "The player's price tag, according to our data, was $454,976. It is unclear what role the player will take in the new team.\n\nHEROIC:\n\n— nilo\n— susp\n— MartinezSa\n— Chr1zN\n— Brollan\n\n— doto (coach)",
+    titleRu: "🇪🇺 HEROIC официально представили 🇸🇪 Brollan",
+    titleEn: "🇪🇺 HEROIC officially revealed 🇸🇪 Brollan",
+    textRu: "Ценник за игрока, по нашим данным, составил 454 976$. Неясно, какую роль займет игрок в новой команде.\n\n🇪🇺 HEROIC:\n\n— 🇸🇪 nilo\n— 🇸🇪 susp\n— 🇪🇸 MartinezSa\n— 🇩🇰 Chr1zN\n— 🇸🇪 Brollan\n\n— 🇫🇮 doto (тренер)",
+    textEn: "The player's price tag, according to our data, was $454,976. It is unclear what role the player will take in the new team.\n\n🇪🇺 HEROIC:\n\n— 🇸🇪 nilo\n— 🇸🇪 susp\n— 🇪🇸 MartinezSa\n— 🇩🇰 Chr1zN\n— 🇸🇪 Brollan\n\n— 🇫🇮 doto (coach)",
     image: "/images/brollanjoinheroic.jpg",
     tagRu: "Трансферы",
     tagEn: "Transfers",
@@ -47,6 +47,7 @@ const mockNews: NewsPost[] = [
 export function NewsFeed() {
   const { lang } = useLanguage()
   const [likedPosts, setLikedPosts] = useState<number[]>([])
+  const [activeImage, setActiveImage] = useState<string | null>(null) // Для открытия фото
 
   useEffect(() => {
     const savedLikes = localStorage.getItem("transfercs_news_likes")
@@ -100,11 +101,14 @@ export function NewsFeed() {
               </div>
 
               {post.image && (
-                <div className="mt-4 overflow-hidden rounded-lg border border-border/40 bg-black/40">
+                <div 
+                  onClick={() => setActiveImage(post.image || null)}
+                  className="mt-4 overflow-hidden rounded-lg border border-border/40 bg-black/40 cursor-zoom-in"
+                >
                   <img 
                     src={post.image} 
                     alt="News media" 
-                    className="h-auto max-h-72 w-full object-cover" 
+                    className="h-auto max-h-72 w-full object-cover transition-transform hover:scale-[1.01]" 
                   />
                 </div>
               )}
@@ -126,7 +130,7 @@ export function NewsFeed() {
                   <span className="font-mono text-xs">0</span>
                 </div>
 
-                <span className="ml-auto rounded bg-secondary/40 px-2 py-0.5尊 text-[10px] font-bold uppercase tracking-wider text-muted-foreground border border-border/30">
+                <span className="ml-auto rounded bg-secondary/40 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground border border-border/30">
                   {lang === "ru" ? post.tagRu : post.tagEn}
                 </span>
               </div>
@@ -134,6 +138,27 @@ export function NewsFeed() {
           )
         })}
       </div>
+
+      {/* Модальное окно для полноэкранного просмотра фото */}
+      {activeImage && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 animate-fade-in"
+          onClick={() => setActiveImage(null)}
+        >
+          <button 
+            type="button"
+            className="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full bg-neutral-900/50"
+            onClick={() => setActiveImage(null)}
+          >
+            <X className="size-6" />
+          </button>
+          <img 
+            src={activeImage} 
+            alt="Full size preview" 
+            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+          />
+        </div>
+      )}
     </div>
   )
 }

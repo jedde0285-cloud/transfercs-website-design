@@ -58,7 +58,7 @@ export function SiteHeader() {
           </button>
 
           {/* Brand/Logo */}
-          <a href="#" className="flex items-center gap-2">
+          <a href="/" className="flex items-center gap-2">
             <span className="flex size-8 items-center justify-center rounded-md bg-primary text-primary-foreground box-glow">
               <Crosshair className="size-5" />
             </span>
