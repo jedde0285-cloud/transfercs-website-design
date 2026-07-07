@@ -90,13 +90,13 @@ export function NewsFeed() {
   return (
     <div className="relative mx-auto max-w-xl px-4 py-10 sm:px-6 lg:py-14 z-10">
       
-      {/* Блок заголовка и фильтров — ВСТАВИТЬ СЮДА */}
-      <div className="mb-6 border-b border-border/60 bg-[#121212]/90 p-5 rounded-xl border border-primary/20 shadow-[0_0_20px_rgba(255,90,0,0.03)] flex flex-wrap items-center justify-between gap-4">
-        <h1 className="font-display text-xl font-bold uppercase tracking-tight text-foreground sm:text-2xl">
+      {/* Блок заголовка и фильтров */}
+      <div className="mb-6 border-b border-border/60 bg-[#121212]/90 p-5 rounded-xl border border-primary/20 shadow-[0_0_20px_rgba(255,90,0,0.03)]">
+        <h1 className="font-display text-2xl font-black uppercase tracking-wider text-white">
           {lang === "ru" ? "Лента новостей" : "News Feed"}
         </h1>
 
-        <div className="flex flex-wrap items-center gap-2 relative">
+        <div className="mt-4 flex flex-wrap items-center gap-2 relative">
           {activeFilters.map((key) => {
             const cat = CATEGORIES[key as keyof typeof CATEGORIES]
             return (
@@ -108,7 +108,7 @@ export function NewsFeed() {
                 <button
                   type="button"
                   onClick={() => removeFilter(key)}
-                  className="text-muted-foreground/60 hover:text-rose-500 transition-colors ml-0.5 p-0.5"
+                  className="text-rose-500/80 hover:text-rose-500 transition-colors ml-0.5 p-0.5"
                   aria-label="Remove filter"
                 >
                   <X className="size-3" />
