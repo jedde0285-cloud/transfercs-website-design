@@ -29,7 +29,7 @@ export function TopTeams() {
         <img 
           src="/images/cologne.webp" 
           alt="Cologne Trophy" 
-          className="size-11 object-contain opacity-85 -rotate-12 drop-shadow-[0_0_8px_hsl(var(--primary)/0.3)]" 
+          className="size-14 object-contain opacity-85 -rotate-12 drop-shadow-[0_0_8px_hsl(var(--primary)/0.3)]" 
         />
       </div>
 
@@ -38,7 +38,7 @@ export function TopTeams() {
         <img 
           src="/images/pglclujnapoca.webp" 
           alt="PGL Cluj Trophy" 
-          className="size-11 object-contain opacity-85 rotate-12 drop-shadow-[0_0_8px_hsl(var(--primary)/0.3)]" 
+          className="size-13 object-contain opacity-85 rotate-12 drop-shadow-[0_0_8px_hsl(var(--primary)/0.3)]" 
         />
       </div>
 
