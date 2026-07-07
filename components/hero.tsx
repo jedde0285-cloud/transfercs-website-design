@@ -72,27 +72,54 @@ export function Hero() {
 
         {/* RIGHT — player with "Расчёт" badge */}
         <div className="order-3 lg:col-span-4">
-          <div className="relative mx-auto max-w-sm">
+          <div className="relative mx-auto max-w-md">
+            {/* orange neon glow behind player */}
+            <div className="pointer-events-none absolute -inset-4 rounded-[2rem] bg-primary/25 blur-2xl" />
+            <div className="pointer-events-none absolute -inset-1 rounded-[1.75rem] bg-gradient-to-b from-primary/40 to-primary/10 blur-md" />
+
             {/* neon frame */}
-            <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-b from-primary/10 to-transparent box-glow">
+            <div className="relative overflow-hidden rounded-3xl border-2 border-primary/70 bg-gradient-to-b from-primary/10 to-transparent shadow-[0_0_40px_-4px_hsl(var(--primary)/0.7),inset_0_0_30px_-8px_hsl(var(--primary)/0.5)]">
               <Image
-                src="/images/pro-player.png"
-                alt="Профессиональный игрок donk"
-                width={640}
+                src="/images/donk.webp"
+                alt="Профессиональный игрок donk в форме BetBoom"
+                width={800}
                 height={800}
                 priority
                 className="h-auto w-full object-cover"
               />
               {/* bottom fade */}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background via-background/70 to-transparent" />
 
-              {/* player name plate */}
-              <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-lg border border-border/60 bg-background/70 px-3 py-2 backdrop-blur-md">
-                <span className="size-2 rounded-full bg-primary" />
-                <span className="font-display text-lg font-bold uppercase tracking-wide">
-                  donk
-                </span>
-                <span className="text-xs text-muted-foreground">· Spirit</span>
+              {/* "most expensive" tag */}
+              <div className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-primary/60 bg-background/80 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-primary backdrop-blur-md">
+                <Sparkles className="size-3" />
+                Самый дорогой игрок
+              </div>
+
+              {/* player info + price at the bottom */}
+              <div className="absolute inset-x-4 bottom-4 rounded-xl border border-primary/40 bg-background/75 p-4 backdrop-blur-md">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="size-2 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary))]" />
+                      <span className="font-display text-2xl font-bold uppercase tracking-wide">
+                        donk
+                      </span>
+                    </div>
+                    <div className="mt-0.5 text-xs uppercase tracking-wider text-muted-foreground">
+                      Team Spirit · Rifler
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-display text-2xl font-bold text-primary text-glow">
+                      $1.9M
+                    </div>
+                    <div className="flex items-center justify-end gap-1 text-xs text-primary">
+                      <Activity className="size-3" />
+                      +12.4%
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
