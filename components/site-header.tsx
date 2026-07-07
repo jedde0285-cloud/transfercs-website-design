@@ -1,22 +1,26 @@
 "use client"
 
 import { useState } from "react"
-import { Menu, X, Crosshair, Calculator, Shield, User, Info, Newspaper } from "lucide-react"
-
-const navItems = [
-  { label: "Новости", href: "#news", icon: Newspaper },
-  { label: "Команды", href: "#teams", icon: Shield },
-  { label: "Игроки", href: "#players", icon: User },
-  { label: "О проекте", href: "#about", icon: Info },
-]
+import { useLanguage } from "@/context/LanguageContext" // <-- Поправь путь к контексту, если он другой
+import { Menu, X, Crosshair, Shield, User, Info, Newspaper } from "lucide-react"
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
+  const { lang, setLang, t } = useLanguage()
+
+  // Динамические пункты навигации из твоего словаря
+  const navItems = [
+    { label: t.nav.news || "Новости", href: "#news", icon: Newspaper }, // Добавил news, если расширишь словарь
+    { label: t.nav.teams, href: "#teams", icon: Shield },
+    { label: t.nav.players, href: "#players", icon: User },
+    { label: t.nav.about, href: "#about", icon: Info },
+  ]
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        {/* Nav sections */}
+        
+        {/* Nav sections (Desktop) */}
         <nav className="hidden items-center gap-1 md:flex">
           {navItems.map((item) => (
             <a
@@ -31,7 +35,7 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        {/* Mobile toggle */}
+        {/* Mobile menu toggle */}
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
@@ -42,15 +46,29 @@ export function SiteHeader() {
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
 
-        {/* Brand */}
-        <a href="#" className="flex items-center gap-2">
-          <span className="flex size-8 items-center justify-center rounded-md bg-primary text-primary-foreground box-glow">
-            <Crosshair className="size-5" />
-          </span>
-          <span className="font-display text-2xl font-bold tracking-tight">
-            Transfer<span className="text-primary text-glow">CS</span>
-          </span>
-        </a>
+        {/* Правая часть: Переключатель языка + Бренд */}
+        <div className="flex items-center gap-4">
+          
+          {/* Переключатель языка (RU / EN) */}
+          <button
+            type="button"
+            onClick={() => setLang(lang === "ru" ? "en" : "ru")}
+            className="inline-flex items-center justify-center rounded-md border border-border/40 bg-secondary/30 px-2.5 py-1 text-xs font-bold uppercase tracking-wider text-muted-foreground transition-all hover:border-primary/40 hover:text-primary"
+          >
+            {lang}
+          </button>
+
+          {/* Brand/Logo */}
+          <a href="#" className="flex items-center gap-2">
+            <span className="flex size-8 items-center justify-center rounded-md bg-primary text-primary-foreground box-glow">
+              <Crosshair className="size-5" />
+            </span>
+            <span className="font-display text-2xl font-bold tracking-tight">
+              Transfer<span className="text-primary text-glow">CS</span>
+            </span>
+          </a>
+
+        </div>
       </div>
 
       {/* Mobile menu */}
