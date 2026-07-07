@@ -1,8 +1,18 @@
 import Image from "next/image"
-import { ArrowRight, Calculator, Sparkles, Activity, TrendingUp } from "lucide-react"
+import { ArrowRight, Calculator, Activity, TrendingUp } from "lucide-react"
 import { TopTeams } from "@/components/top-teams"
+import { useLanguage } from "./language-provider" // <-- Импортируем хук языка
 
 export function Hero() {
+  const { lang, t } = useLanguage() // <-- Подключаем переводы
+
+  // Настройка динамического массива статистики из словаря
+  const statsItems = [
+    { value: "150+", label: t.hero.stats.players },
+    { value: "30+", label: t.hero.stats.teams },
+    { value: "ТЕХНОЛОГИЯ" || "TECH", label: t.hero.stats.model }, // Используем ТЕХНОЛОГИЯ по умолчанию
+  ]
+
   return (
     <section className="relative overflow-hidden">
       {/* subtle grid + glow background */}
@@ -20,14 +30,13 @@ export function Hero() {
         <div className="order-1 flex flex-col justify-center lg:order-2 lg:col-span-5">
 
           <h1 className="text-balance font-display text-5xl font-bold uppercase leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
-            Узнай реальную
+            {t.hero.titleTop}
             <br />
-            <span className="text-primary text-glow">цену игрока</span>
+            <span className="text-primary text-glow">{t.hero.titleAccent}</span>
           </h1>
 
           <p className="mt-6 max-w-md text-pretty leading-relaxed text-muted-foreground">
-            Мы рассчитываем трансферную стоимость киберспортсменов на основе
-            статистики, возраста и рынка. Узнай, сколько стоит твой любимый игрок.
+            {t.hero.desc}
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -36,24 +45,20 @@ export function Hero() {
               className="group inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-wide text-primary-foreground transition-all hover:brightness-110 box-glow"
             >
               <Calculator className="size-4" />
-              Начать расчёт
+              {t.hero.ctaStart}
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </a>
             <a
               href="#players"
               className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:bg-secondary"
             >
-              Все игроки
+              {t.hero.ctaPlayers}
             </a>
           </div>
 
           {/* stats row */}
           <div className="mt-10 grid max-w-md grid-cols-3 gap-4 border-t border-border/60 pt-6">
-            {[
-              { value: "150+", label: "Игроков" },
-              { value: "30+", label: "Команд" },
-              { value: "ТЕХНОЛОГИЯ", label: "Уникальная модель расчёта" },
-            ].map((s) => (
+            {statsItems.map((s) => (
               <div key={s.label}>
                 <div className="font-display text-2xl font-bold text-foreground">
                   {s.value}
@@ -76,7 +81,7 @@ export function Hero() {
             <div className="relative">
               <Image
                 src="/images/LUQi5dX9boyO0uDadUGht5.webp"
-                alt="Профессиональный игрок flamez в форме Team Vitality"
+                alt={lang === "ru" ? "Профессиональный игрок flamez в форме Team Vitality" : "Professional player flamez in Team Vitality uniform"}
                 width={900}
                 height={900}
                 priority
@@ -89,11 +94,11 @@ export function Hero() {
             {/* nickname + price info UNDER the player */}
             <div className="relative z-10 -mt-6 rounded-xl border border-primary/40 bg-background/75 p-5 backdrop-blur-md box-glow">
               
-              {/* Прорыв сезона — теперь внутри карточки сверху */}
+              {/* Прорыв сезона */}
               <div className="mb-4 flex justify-center">
                 <div className="inline-flex items-center gap-1.5 rounded-md bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-black shadow-lg shadow-primary/20">
                   <TrendingUp className="size-3 text-black" />
-                  Прорыв сезона
+                  {lang === "ru" ? "Прорыв сезона" : "Breakthrough of the season"}
                 </div>
               </div>
 
