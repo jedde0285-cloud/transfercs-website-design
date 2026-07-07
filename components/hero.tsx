@@ -2,7 +2,7 @@ import Image from "next/image"
 import { ArrowRight, Calculator, Sparkles, Activity, TrendingUp } from "lucide-react"
 import { TopTeams } from "@/components/top-teams"
 
-export default function Hero() {
+export function Hero() {
   return (
     <section className="relative overflow-hidden">
       {/* subtle grid + glow background */}
