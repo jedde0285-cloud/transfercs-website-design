@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { ArrowRight, Calculator, Sparkles, Activity } from "lucide-react"
+import { ArrowRight, Calculator, Sparkles, Activity, Rocket } from "lucide-react"
 import { TopTeams } from "@/components/top-teams"
 
 export function Hero() {
@@ -73,10 +73,16 @@ export function Hero() {
             <div className="pointer-events-none absolute inset-0 -bottom-6 rounded-full bg-primary/25 blur-[90px]" />
 
             {/* player image with neon outline emanating from the silhouette */}
+
+            <div className="absolute left-2 top-2 z-10 inline-flex items-center gap-1.5 rounded-full border border-accent/60 bg-background/70 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-accent backdrop-blur-md">
+  <Rocket className="size-3" />
+  Прорыв сезона
+</div>
+
             <div className="relative">
               <Image
-                src="/images/donk.webp"
-                alt="Профессиональный игрок donk в форме BetBoom"
+                src="/images/LUQi5dX9boyO0uDadUGht5.webp"
+                alt="Профессиональный игрок flamez в форме Team Vitality"
                 width={900}
                 height={900}
                 priority
