@@ -74,12 +74,13 @@ export function Hero() {
 
             {/* player image with neon outline emanating from the silhouette */}
 
-            <div className="flex justify-center">
-  <div className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-black shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
-    <TrendingUp className="size-3.5 text-black" />
-    Прорыв сезона
-  </div>
-</div>
+            <div className="relative z-10 -mt-2 mb-3 flex justify-center">
+              <div className="inline-flex items-center gap-1.5 rounded-md bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-black shadow-lg shadow-primary/20">
+                <TrendingUp className="size-3 text-black" />
+                Прорыв сезона
+              </div>
+            </div>
+
             <div className="relative">
               <Image
                 src="/images/LUQi5dX9boyO0uDadUGht5.webp"
@@ -94,7 +95,7 @@ export function Hero() {
             </div>
 
             {/* nickname + price info UNDER the player */}
-            <div className="relative z-10 -mt-6 flex items-center justify-between gap-3 rounded-xl border border-primary/40 bg-background/75 px-5 py-3 backdrop-blur-md box-glow">
+            <div className="relative z-10 mt-0 flex items-center justify-between gap-3 rounded-xl border border-primary/40 bg-background/75 px-5 py-3 backdrop-blur-md box-glow">
               <div>
                 <div className="flex items-center gap-2">
                   <span className="size-2 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary))]" />
