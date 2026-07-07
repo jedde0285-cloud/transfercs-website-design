@@ -9,8 +9,9 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false)
   const { lang, setLang, t } = useLanguage()
 
+   // Массив навигации в components/site-header.tsx
   const navItems = [
-    { label: t.nav.news, href: "/news", icon: Newspaper }, 
+    { label: t.nav.calc, href: "/news", icon: Newspaper }, // <-- ЗАМЕНИЛИ t.nav.news НА t.nav.calc
     { label: t.nav.teams, href: "#teams", icon: Shield },
     { label: t.nav.players, href: "#players", icon: User },
     { label: t.nav.about, href: "#about", icon: Info },
