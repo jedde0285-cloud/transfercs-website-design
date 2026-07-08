@@ -841,7 +841,7 @@ export const playersData: PlayerStats[] = [
     "name": "Wicadia",
     "role": "Rifler",
     "age": 21,
-    "rating": 1.08,
+    "rating": 1.13,
     "trophies": 1,
     "majors": 4,
     "maps": 610,
