@@ -42,7 +42,7 @@ export function Hero() {
   // Фильтруем этот массив по вводу пользователя
   const filteredPlayers = searchTerm.trim() === "" 
     ? [] 
-    : playersWithPrices.filter(p => p.name.toLowerCase().startsWith(searchTerm.toLowerCase()))
+    : playersWithPrices.filter(p => p.name.toLowerCase() === searchTerm.toLowerCase())
 
   // Вывод цены полностью до доллара без сокращений ($1,900,000)
   const formatFullPrice = (price: number) => {
@@ -146,8 +146,8 @@ export function Hero() {
                           {/* Правая часть: Цена */}
                           <div className="text-right">
                             <div className="font-display text-xs font-medium text-muted-foreground leading-none">
-                              Est. Value
-                            </div>
+  {lang === "ru" ? "Оценка стоимости" : "Est. Value"}
+</div>
                             <div className="font-display text-sm font-bold text-primary tracking-wide mt-0.5">
                               ${player.price.toLocaleString()}
                             </div>
