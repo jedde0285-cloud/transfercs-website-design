@@ -93,7 +93,7 @@ export function Hero() {
 
               {/* РАСШИРЕННЫЙ ВЫПАДАЮЩИЙ СПИСОК РЕЗУЛЬТАТОВ */}
               {isFocused && searchTerm.trim() !== "" && (
-                <div className="absolute top-full left-0 mt-2 w-[145%] rounded-xl border border-primary/30 bg-background/95 p-2 shadow-2xl backdrop-blur-md box-glow animate-in fade-in slide-in-from-top-1 duration-200">
+                <div className="absolute top-full left-0 mt-2 w-[145%] rounded-xl border border-primary/30 bg-card p-2 shadow-2xl z-50 box-glow animate-in fade-in slide-in-from-top-1 duration-200">
                   
                   {filteredPlayers.length > 0 ? (
                     /* Контейнер со скроллом */
