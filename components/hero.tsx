@@ -63,6 +63,7 @@ export function Hero() {
       badgeRu: "Прорыв сезона",
       badgeEn: "Breakthrough of the season",
       icon: "trending",
+      country: "il", // Израиль
       graphPath: "M 12,62 L 29,56 L 46,70 L 63,52 L 81,34 L 100,46",
       scaleMax: "1.40+", scaleMid1: "1.30", scaleMid2: "1.20", scaleMid3: "1.10", scaleMin: "1.00"
     },
@@ -72,6 +73,7 @@ export function Hero() {
       badgeRu: "Снайпер сезона",
       badgeEn: "Sniper of the season",
       icon: "awp",
+      country: "ru", // Россия
       graphPath: "M 12,15 L 29,82 L 46,67 L 63,30 L 81,77 L 100,72",
       scaleMax: "1.60+", scaleMid1: "1.45", scaleMid2: "1.30", scaleMid3: "1.15", scaleMin: "1.00"
     },
@@ -81,6 +83,7 @@ export function Hero() {
       badgeRu: "Опорник сезона",
       badgeEn: "Anchor of the season",
       icon: "anchor",
+      country: "il", // Израиль
       graphPath: "M 12,30 L 29,73 L 46,10 L 63,73 L 81,40 L 100,43",
       scaleMax: "1.30+", scaleMid1: "1.22", scaleMid2: "1.14", scaleMid3: "1.06", scaleMin: "0.98"
     }
@@ -337,9 +340,21 @@ export function Hero() {
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="size-2 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary))]" />
+                    <div className="flex items-center gap-2">
                     <span className="font-display text-2xl font-bold uppercase tracking-wide">
                       {featuredPlayer ? featuredPlayer.name : "flameZ"}
                     </span>
+                    {featuredPlayer?.country && (
+                      <img
+                        src={`https://flagcdn.com/w40/${featuredPlayer.country}.png`}
+                        srcSet={`https://flagcdn.com/w80/${featuredPlayer.country}.png 2x`}
+                        width="20"
+                        height="12"
+                        alt="Country flag"
+                        className="rounded-sm object-cover opacity-80 border border-white/10"
+                      />
+                    )}
+                  </div>
                   </div>
                   <div className="mt-0.5 text-xs uppercase tracking-wider text-muted-foreground">
                     {featuredPlayer ? `${featuredPlayer.team_name} · ${featuredPlayer.role}` : "Team Vitality · Rifler"}
