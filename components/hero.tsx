@@ -25,24 +25,24 @@ export function Hero() {
   const [isFocused, setIsFocused] = useState(false)
 
   // Рассчитываем цены для всех на лету в зависимости от их роли (игрок или тренер)
-const playersWithPrices = playersData.map(person => {
-  if (person.role === "Coach") {
+  const playersWithPrices = playersData.map(person => {
+    if (person.role === "Coach") {
+      return {
+        ...person,
+        price: calculateCoachPrice(person as any)
+      }
+    }
+    
     return {
       ...person,
-      price: calculateCoachPrice(person as any)
+      price: calculatePrice(person)
     }
-  }
-  
-  return {
-    ...person,
-    price: calculatePrice(person)
-  }
-})
+  })
 
-// Фильтруем этот массив по вводу пользователя
-const filteredPlayers = searchTerm.trim() === "" 
-  ? [] 
-  : playersWithPrices.filter(p => p.name.toLowerCase().startsWith(searchTerm.toLowerCase()))
+  // Фильтруем этот массив по вводу пользователя
+  const filteredPlayers = searchTerm.trim() === "" 
+    ? [] 
+    : playersWithPrices.filter(p => p.name.toLowerCase().startsWith(searchTerm.toLowerCase()))
 
   // Вывод цены полностью до доллара без сокращений ($1,900,000)
   const formatFullPrice = (price: number) => {
@@ -91,9 +91,9 @@ const filteredPlayers = searchTerm.trim() === ""
           {/* ПОИСКОВАЯ ЗОНА */}
           <div className="relative mt-8 flex items-center gap-4 z-40">
             
-            {/* Оболочка инпута */}
+            {/* Оболочка инпута (сделали relative, чтобы результаты всплывали строго под ней) */}
             <div className="relative flex-1 max-w-md">
-              <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+              <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none z-10">
                 <Search className={`size-4 transition-colors ${isFocused ? 'text-primary' : 'text-muted-foreground/60'}`} />
               </span>
               <input
@@ -103,12 +103,12 @@ const filteredPlayers = searchTerm.trim() === ""
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setTimeout(() => setIsFocused(false), 200)}
-                className="w-full rounded-lg border border-border bg-background/60 pl-10 pr-4 py-3 text-sm font-medium tracking-wide text-foreground placeholder:text-muted-foreground/50 outline-none transition-all focus:border-primary/80 focus:ring-1 focus:ring-primary/20 box-glow"
+                className="w-full rounded-lg border border-border bg-background/60 pl-10 pr-4 py-3 text-sm font-medium tracking-wide text-foreground placeholder:text-muted-foreground/50 outline-none transition-all focus:border-primary/80 focus:ring-1 focus:ring-primary/20 box-glow relative z-10"
               />
 
               {/* РАСШИРЕННЫЙ ВЫПАДАЮЩИЙ СПИСОК РЕЗУЛЬТАТОВ */}
               {isFocused && searchTerm.trim() !== "" && (
-                <div className="absolute top-full left-0 mt-2 w-[145%] rounded-xl border border-primary/30 bg-card p-2 shadow-2xl z-50 box-glow animate-in fade-in slide-in-from-top-1 duration-200">
+                <div className="absolute top-full left-0 mt-2 w-full rounded-xl border border-white/10 bg-[#0b0c10] p-2 shadow-2xl z-50 box-glow animate-in fade-in slide-in-from-top-1 duration-200">
                   
                   {filteredPlayers.length > 0 ? (
                     <div className="py-2 max-h-[280px] overflow-y-auto custom-scrollbar">
@@ -156,7 +156,6 @@ const filteredPlayers = searchTerm.trim() === ""
                       ))}
                     </div>
                   ) : (
-
                     /* Пустой результат */
                     <div className="py-6 text-center text-xs text-muted-foreground uppercase tracking-wider">
                       {lang === "ru" ? "Игрок не найден" : "Player not found"}
@@ -166,7 +165,7 @@ const filteredPlayers = searchTerm.trim() === ""
               )}
             </div>
 
-            {/* Кнопка ВСЕ ИГРОКИ */}
+          {/* Кнопка ВСЕ ИГРОКИ */}
             <a
               href="#players"
               className="inline-flex items-center gap-2 rounded-lg border border-border bg-background/40 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-foreground transition-all hover:bg-secondary hover:border-primary/40"
