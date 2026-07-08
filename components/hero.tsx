@@ -67,7 +67,6 @@ export function Hero() {
                 <div className="font-display text-lg xs:text-xl sm:text-2xl font-bold text-foreground truncate break-words">
                   {s.value}
                 </div>
-                {/* Возвращен исходный перенос строк для МОДЕЛЬ РАСЧЕТА */}
                 <div className="text-xs uppercase tracking-wider text-muted-foreground">
                   {s.label}
                 </div>
@@ -96,13 +95,13 @@ export function Hero() {
               <div className="pointer-events-none absolute inset-x-0 -bottom-1 z-[2] h-24 bg-gradient-to-t from-background to-transparent" />
             </div>
 
-            {/* КАРТОЧКА ИГРОКА С КЛАССОМ ИНТЕРАКТИВНОЙ ГРУППЫ */}
+            {/* КАРТОЧКА ИГРОКА */}
             <div className="group/card relative z-10 -mt-6 rounded-xl border border-primary/40 bg-background/75 p-5 backdrop-blur-md box-glow transition-all duration-300">
               
-              {/* КОМПАКТНАЯ ВЫПЛЫВАЮЩАЯ ПЛАШКА С ГРАФИКОМ */}
-              <div className="pointer-events-none absolute bottom-full left-1/2 mb-3 w-[240px] -translate-x-1/2 rounded-lg border border-primary/40 bg-background/95 p-3 opacity-0 translate-y-2 scale-95 shadow-2xl transition-all duration-300 ease-out group-hover/card:pointer-events-auto group-hover/card:translate-y-0 group-hover/card:scale-100 group-hover/card:opacity-100 backdrop-blur-md z-30 box-glow">
+              {/* ПЛАШКА С ДИНАМИКОЙ (Ширина немного увеличена до 265px) */}
+              <div className="pointer-events-none absolute bottom-full left-1/2 mb-3 w-[265px] -translate-x-1/2 rounded-lg border border-primary/40 bg-background/95 p-3 opacity-0 translate-y-2 scale-95 shadow-2xl transition-all duration-300 ease-out group-hover/card:pointer-events-auto group-hover/card:translate-y-0 group-hover/card:scale-100 group-hover/card:opacity-100 backdrop-blur-md z-30 box-glow">
                 
-                {/* Заголовок строго ДИНАМИКА */}
+                {/* Заголовок */}
                 <div className="mb-2 text-center">
                   <div className="font-display text-xs font-black uppercase tracking-widest text-primary text-glow">
                     {lang === "ru" ? "ДИНАМИКА" : "DYNAMICS"}
@@ -122,30 +121,30 @@ export function Hero() {
                     <span>0.90</span>
                   </div>
 
-                  {/* SVG-График биржи (Красивая сплошная светящаяся линия) */}
-                  <svg className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  {/* SVG-График биржи */}
+                  <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <defs>
-                      <linearGradient id="chart-glow-clean" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.2" />
+                      <linearGradient id="orange-chart-glow" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.15" />
                         <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.0" />
                       </linearGradient>
                     </defs>
                     
-                    {/* Градиентная подложка */}
+                    {/* Мягкая градиентная заливка под графиком */}
                     <path
-                      d="M 5,62 C 15,58 15,56 23,56 C 33,60 35,70 41,70 C 50,65 52,52 59,52 C 68,46 72,34 78,34 C 86,38 90,46 95,46 L 95,100 L 5,100 Z"
-                      fill="url(#chart-glow-clean)"
+                      d="M 5,62 L 24,56 L 43,70 L 62,52 L 81,34 L 95,46 L 95,100 L 5,100 Z"
+                      fill="url(#orange-chart-glow)"
                     />
 
-                    {/* Сплошная линия тренда */}
+                    {/* Яркая, но не пересвеченная оранжевая линия тренда */}
                     <path
-                      d="M 5,62 C 15,58 15,56 23,56 C 33,60 35,70 41,70 C 50,65 52,52 59,52 C 68,46 72,34 78,34 C 86,38 90,46 95,46"
+                      d="M 5,62 L 24,56 L 43,70 L 62,52 L 81,34 L 95,46"
                       fill="none"
                       stroke="hsl(var(--primary))"
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      style={{ filter: "drop-shadow(0px 0px 3px hsl(var(--primary)))" }}
+                      style={{ filter: "drop-shadow(0px 1px 2px rgba(255,122,0,0.5))" }}
                     />
                   </svg>
                 </div>
