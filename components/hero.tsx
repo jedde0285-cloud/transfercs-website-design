@@ -1,12 +1,59 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
-import { ArrowRight, Calculator, Activity, TrendingUp } from "lucide-react"
+import { Search, Activity, TrendingUp } from "lucide-react"
 import { TopTeams } from "./top-teams"
 import { useLanguage } from "./language-provider"
+import { playersData } from "@/lib/players-data"
+import { calculatePrice } from "@/lib/pricing-model-players"
+import { calculateCoachPrice } from "@/lib/pricing-model-coaches"
+
+// Интерфейс для интеграции с твоим будущим файлом данных
+interface PlayerData {
+  id: string
+  nickname: string
+  fullName: string
+  teamLogo: string
+  teamName: string
+  price: number // Цена числом (например, 1900000)
+}
 
 export function Hero() {
   const { lang, t } = useLanguage()
+  const [searchTerm, setSearchTerm] = useState("")
+  const [isFocused, setIsFocused] = useState(false)
+
+  // Рассчитываем цены для всех на лету в зависимости от их роли (игрок или тренер)
+  const playersWithPrices = playersData.map(person => {
+    if (person.role === "Coach") {
+      return {
+        ...person,
+        price: calculateCoachPrice(person as any)
+      }
+    }
+    
+    return {
+      ...person,
+      price: calculatePrice(person)
+    }
+  })
+
+  // Фильтруем этот массив по вводу пользователя
+  const filteredPlayers = searchTerm.trim() === "" 
+    ? [] 
+    : playersWithPrices.filter(p => p.name.toLowerCase() === searchTerm.toLowerCase())
+
+    const flamezCard = playersWithPrices.find(p => p.name.toLowerCase() === "flamez")
+
+  // Вывод цены полностью до доллара без сокращений ($1,900,000)
+  const formatFullPrice = (price: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0
+    }).format(price)
+  }
 
   const statsItems = [
     { value: "150+", label: t.hero.stats.players },
@@ -43,18 +90,87 @@ export function Hero() {
             {t.hero.desc}
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a
-              href="#calc"
-              className="group inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-wide text-primary-foreground transition-all hover:brightness-110 box-glow"
-            >
-              <Calculator className="size-4" />
-              {t.hero.ctaStart}
-              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-            </a>
+          {/* ПОИСКОВАЯ ЗОНА */}
+          <div className="relative mt-8 flex items-center gap-4 z-40">
+            
+            {/* Оболочка инпута (сделали relative, чтобы результаты всплывали строго под ней) */}
+            <div className="relative flex-1 max-w-md">
+              <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none z-10">
+                <Search className={`size-4 transition-colors ${isFocused ? 'text-primary' : 'text-muted-foreground/60'}`} />
+              </span>
+              <input
+                type="text"
+                placeholder={lang === "ru" ? "Поиск киберспортсмена..." : "Search pro player..."}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setTimeout(() => setIsFocused(false), 200)}
+                className="w-full rounded-lg border border-border bg-background/60 pl-10 pr-4 py-3 text-sm font-medium tracking-wide text-foreground placeholder:text-muted-foreground/50 outline-none transition-all focus:border-primary/80 focus:ring-1 focus:ring-primary/20 box-glow relative z-10"
+              />
+
+              {/* РАСШИРЕННЫЙ ВЫПАДАЮЩИЙ СПИСОК РЕЗУЛЬТАТОВ */}
+              {isFocused && searchTerm.trim() !== "" && (
+                <div className="absolute top-full left-0 mt-2 w-full rounded-xl border border-white/10 bg-[#0b0c10] p-2 shadow-2xl z-50 box-glow animate-in fade-in slide-in-from-top-1 duration-200">
+                  
+                  {filteredPlayers.length > 0 ? (
+                    <div className="py-2 max-h-[280px] overflow-y-auto custom-scrollbar">
+                      {filteredPlayers.map((player) => (
+                        <div
+                          key={player.name}
+                          className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-white/[0.04] transition-colors cursor-pointer group"
+                        >
+                          {/* Левая часть: Лого + Имя */}
+                          <div className="flex items-center gap-3">
+                            <div className="w-6 h-6 rounded bg-white/5 flex items-center justify-center p-1 border border-white/10 group-hover:border-white/20 transition-colors">
+                              <img
+                                src={player.teamLogo}
+                                alt={player.team_name}
+                                className="w-full h-full object-contain"
+                              />
+                            </div>
+
+                            {/* Информация игрока */}
+                            <div>
+                              <div className="font-display text-sm font-bold text-foreground tracking-wide leading-none">
+                                {player.name}
+                              </div>
+                              <div className="text-[9px] text-muted-foreground uppercase tracking-wider mt-0.5 flex items-center gap-1.5">
+                                <span>{player.role} · {player.team_name}</span>
+                                {player.is_bench && (
+                                  <span className="px-1 py-0.5 bg-destructive/20 border border-destructive/40 text-destructive text-[8px] font-bold rounded uppercase tracking-wider normal-case">
+                                    Bench
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Правая часть: Цена */}
+                          <div className="text-right">
+                            <div className="font-display text-xs font-medium text-muted-foreground leading-none">
+  {lang === "ru" ? "Оценка стоимости" : "Est. Value"}
+</div>
+                            <div className="font-display text-sm font-bold text-primary tracking-wide mt-0.5">
+                              ${player.price.toLocaleString()}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    /* Пустой результат */
+                    <div className="py-6 text-center text-xs text-muted-foreground uppercase tracking-wider">
+                      {lang === "ru" ? "Игрок не найден" : "Player not found"}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+          {/* Кнопка ВСЕ ИГРОКИ */}
             <a
               href="#players"
-              className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:bg-secondary"
+              className="inline-flex items-center gap-2 rounded-lg border border-border bg-background/40 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-foreground transition-all hover:bg-secondary hover:border-primary/40"
             >
               {t.hero.ctaPlayers}
             </a>
@@ -67,7 +183,6 @@ export function Hero() {
                 <div className="font-display text-lg xs:text-xl sm:text-2xl font-bold text-foreground truncate break-words">
                   {s.value}
                 </div>
-                {/* Возвращен исходный перенос строк для МОДЕЛЬ РАСЧЕТА */}
                 <div className="text-xs uppercase tracking-wider text-muted-foreground">
                   {s.label}
                 </div>
@@ -96,13 +211,13 @@ export function Hero() {
               <div className="pointer-events-none absolute inset-x-0 -bottom-1 z-[2] h-24 bg-gradient-to-t from-background to-transparent" />
             </div>
 
-            {/* КАРТОЧКА ИГРОКА С КЛАССОМ ИНТЕРАКТИВНОЙ ГРУППЫ */}
+            {/* КАРТОЧКА ИГРОКА */}
             <div className="group/card relative z-10 -mt-6 rounded-xl border border-primary/40 bg-background/75 p-5 backdrop-blur-md box-glow transition-all duration-300">
               
-              {/* КОМПАКТНАЯ ВЫПЛЫВАЮЩАЯ ПЛАШКА С ГРАФИКОМ */}
-              <div className="pointer-events-none absolute bottom-full left-1/2 mb-3 w-[240px] -translate-x-1/2 rounded-lg border border-primary/40 bg-background/95 p-3 opacity-0 translate-y-2 scale-95 shadow-2xl transition-all duration-300 ease-out group-hover/card:pointer-events-auto group-hover/card:translate-y-0 group-hover/card:scale-100 group-hover/card:opacity-100 backdrop-blur-md z-30 box-glow">
+              {/* ПЛАШКА С ДИНАМИКОЙ */}
+              <div className="pointer-events-none absolute bottom-full left-1/2 mb-3 w-[265px] -translate-x-1/2 rounded-lg border border-primary/40 bg-background/95 p-3 opacity-0 translate-y-2 scale-95 shadow-2xl transition-all duration-300 ease-out group-hover/card:pointer-events-auto group-hover/card:translate-y-0 group-hover/card:scale-100 group-hover/card:opacity-100 backdrop-blur-md z-30 box-glow">
                 
-                {/* Заголовок строго ДИНАМИКА */}
+                {/* Заголовок */}
                 <div className="mb-2 text-center">
                   <div className="font-display text-xs font-black uppercase tracking-widest text-primary text-glow">
                     {lang === "ru" ? "ДИНАМИКА" : "DYNAMICS"}
@@ -112,8 +227,8 @@ export function Hero() {
                 {/* Контейнер графика с фоновой сеткой */}
                 <div className="relative h-24 w-full border-b border-l border-muted-foreground/30 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:12px_12px]">
                   
-                  {/* Шкала рейтинга слева внутри сетки */}
-                  <div className="absolute left-1 inset-y-0 flex flex-col justify-between text-[7px] font-mono text-muted-foreground/70 text-left w-5 select-none z-10 pt-0.5">
+                  {/* Шкала рейтинга слева */}
+                  <div className="absolute left-1 inset-y-0 flex flex-col justify-between text-[7px] font-mono text-muted-foreground/70 text-left w-5 select-none z-20 pt-0.5">
                     <span>1.40+</span>
                     <span>1.30</span>
                     <span>1.20</span>
@@ -122,36 +237,35 @@ export function Hero() {
                     <span>0.90</span>
                   </div>
 
-                  {/* SVG-График биржи (Красивая сплошная светящаяся линия) */}
-                  <svg className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  {/* SVG-График биржи (адаптивный по сетке) */}
+                  <svg className="absolute inset-0 z-10 h-full w-full overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <defs>
-                      <linearGradient id="chart-glow-clean" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.2" />
-                        <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.0" />
+                      <linearGradient id="orange-glow" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#ff7a00" stopOpacity="0.15" />
+                        <stop offset="100%" stopColor="#ff7a00" stopOpacity="0.0" />
                       </linearGradient>
                     </defs>
                     
-                    {/* Градиентная подложка */}
+                    {/* Заливка под линией тренда */}
                     <path
-                      d="M 5,62 C 15,58 15,56 23,56 C 33,60 35,70 41,70 C 50,65 52,52 59,52 C 68,46 72,34 78,34 C 86,38 90,46 95,46 L 95,100 L 5,100 Z"
-                      fill="url(#chart-glow-clean)"
+                      d="M 12,62 L 29,56 L 46,70 L 63,52 L 81,34 L 100,46 L 100,100 L 12,100 Z"
+                      fill="url(#orange-glow)"
                     />
 
-                    {/* Сплошная линия тренда */}
+                    {/* Точная оранжевая линия графика по точкам */}
                     <path
-                      d="M 5,62 C 15,58 15,56 23,56 C 33,60 35,70 41,70 C 50,65 52,52 59,52 C 68,46 72,34 78,34 C 86,38 90,46 95,46"
+                      d="M 12,62 L 29,56 L 46,70 L 63,52 L 81,34 L 100,46"
                       fill="none"
-                      stroke="hsl(var(--primary))"
+                      stroke="#ff7a00"
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      style={{ filter: "drop-shadow(0px 0px 3px hsl(var(--primary)))" }}
                     />
                   </svg>
                 </div>
 
-                {/* Временная шкала со всеми месяцами */}
-                <div className="mt-1.5 flex justify-between text-[6px] font-mono tracking-tighter text-muted-foreground/60 uppercase px-0.5">
+                {/* Временная шкала внизу, выровненная по сетке */}
+                <div className="mt-1.5 flex justify-between text-[6px] font-mono tracking-tighter text-muted-foreground/60 uppercase pl-7 pr-0.5">
                   <span>Янв 25</span>
                   <span>Апр 25</span>
                   <span>Июл 25</span>
@@ -169,22 +283,22 @@ export function Hero() {
                 </div>
               </div>
 
-              {/* Основной контент карточки */}
+              {/* Основной контент карточки (теперь цена берется из твоей модели расчетов) */}
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="size-2 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary))]" />
                     <span className="font-display text-2xl font-bold uppercase tracking-wide">
-                      flameZ
+                      {flamezCard ? flamezCard.name : "flameZ"}
                     </span>
                   </div>
                   <div className="mt-0.5 text-xs uppercase tracking-wider text-muted-foreground">
-                    Team Vitality · Rifler
+                    {flamezCard ? `${flamezCard.team_name} · ${flamezCard.role}` : "Team Vitality · Rifler"}
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="font-display text-2xl font-bold text-primary text-glow">
-                    $1.9M
+                  <div className="font-display text-xl font-bold text-primary text-glow whitespace-nowrap">
+                    {flamezCard ? formatFullPrice(flamezCard.price) : "$1.9M"}
                   </div>
                   <div className="flex items-center justify-end gap-1 text-xs text-primary">
                     <Activity className="size-3" />

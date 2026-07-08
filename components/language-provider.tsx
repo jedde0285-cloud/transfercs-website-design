@@ -28,7 +28,7 @@ type Dict = {
 
 const dictionaries: Record<Lang, Dict> = {
   ru: {
-    nav: { calc: "Новости", teams: "Команды", players: "Игроки", about: "О проекте" },
+    nav: { calc: "Новости", teams: "Клубы", players: "Игроки", about: "О проекте" },
     hero: {
       badge: "Аналитика киберспорта · CS",
       titleTop: "Узнай реальную",
