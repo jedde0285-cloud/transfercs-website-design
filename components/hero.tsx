@@ -44,6 +44,8 @@ export function Hero() {
     ? [] 
     : playersWithPrices.filter(p => p.name.toLowerCase() === searchTerm.toLowerCase())
 
+    const flamezCard = playersWithPrices.find(p => p.name.toLowerCase() === "flamez")
+
   // Вывод цены полностью до доллара без сокращений ($1,900,000)
   const formatFullPrice = (price: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -281,22 +283,22 @@ export function Hero() {
                 </div>
               </div>
 
-              {/* Основной контент карточки */}
+              {/* Основной контент карточки (теперь цена берется из твоей модели расчетов) */}
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="size-2 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary))]" />
                     <span className="font-display text-2xl font-bold uppercase tracking-wide">
-                      flameZ
+                      {flamezCard ? flamezCard.name : "flameZ"}
                     </span>
                   </div>
                   <div className="mt-0.5 text-xs uppercase tracking-wider text-muted-foreground">
-                    Team Vitality · Rifler
+                    {flamezCard ? `${flamezCard.team_name} · {player.role}` : "Team Vitality · Rifler"}
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="font-display text-2xl font-bold text-primary text-glow">
-                    $1.9M
+                  <div className="font-display text-xl font-bold text-primary text-glow whitespace-nowrap">
+                    {flamezCard ? formatFullPrice(flamezCard.price) : "$1.9M"}
                   </div>
                   <div className="flex items-center justify-end gap-1 text-xs text-primary">
                     <Activity className="size-3" />
