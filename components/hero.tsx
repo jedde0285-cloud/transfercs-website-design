@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { Search, Activity, TrendingUp } from "lucide-react"
+import { Search, Activity, TrendingUp, Crosshair, Shield } from "lucide-react"
 import { TopTeams } from "./top-teams"
 import { useLanguage } from "./language-provider"
 import { playersData } from "@/lib/players-data"
@@ -54,6 +54,61 @@ export function Hero() {
       maximumFractionDigits: 0
     }).format(price)
   }
+
+  // 1. Конфигурация для трех промо-карт (flameZ, m0NESY, HeavyGod)
+  const promoPlayersConfig = [
+    {
+      searchName: "flamez",
+      image: "/images/LUQi5dX9boyO0uDadUGht5.webp",
+      badgeRu: "Прорыв сезона",
+      badgeEn: "Breakthrough of the season",
+      icon: "trending",
+      graphPath: "M 12,62 L 29,56 L 46,70 L 63,52 L 81,34 L 100,46",
+      scaleMax: "1.40+", scaleMid1: "1.30", scaleMid2: "1.20", scaleMid3: "1.10", scaleMin: "1.00"
+    },
+    {
+      searchName: "m0nesy",
+      image: "/images/m0nesy.webp",
+      badgeRu: "Снайпер сезона",
+      badgeEn: "Sniper of the season",
+      icon: "awp",
+      graphPath: "M 12,15 L 29,82 L 46,67 L 63,30 L 81,77 L 100,72",
+      scaleMax: "1.60+", scaleMid1: "1.45", scaleMid2: "1.30", scaleMid3: "1.15", scaleMin: "1.00"
+    },
+    {
+      searchName: "heavygod",
+      image: "/images/heavygod.webp",
+      badgeRu: "Опорник сезона",
+      badgeEn: "Anchor of the season",
+      icon: "anchor",
+      graphPath: "M 12,30 L 29,73 L 46,10 L 63,73 L 81,40 L 100,43",
+      scaleMax: "1.30+", scaleMid1: "1.22", scaleMid2: "1.14", scaleMid3: "1.06", scaleMin: "0.98"
+    }
+  ]
+
+  // 2. Состояние для хранения выбранного игрока
+  const [featuredPlayer, setFeaturedPlayer] = useState<any>(null)
+
+  // 3. Выбор случайного игрока при загрузке страницы
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * promoPlayersConfig.length)
+    const selectedPromo = promoPlayersConfig[randomIndex]
+    const dbPlayer = playersWithPrices.find(p => p.name.toLowerCase() === selectedPromo.searchName)
+    
+    if (dbPlayer) {
+      setFeaturedPlayer({ ...dbPlayer, ...selectedPromo })
+    } else {
+      // Страховка на случай отсутствия в базе
+      setFeaturedPlayer({
+        name: selectedPromo.searchName === "m0nesy" ? "m0NESY" : selectedPromo.searchName === "heavygod" ? "HeavyGod" : "flameZ",
+        team_name: selectedPromo.searchName === "m0nesy" ? "G2" : selectedPromo.searchName === "heavygod" ? "Cloud9" : "Vitality",
+        role: selectedPromo.searchName === "m0nesy" ? "AWP" : "Rifler",
+        price: selectedPromo.searchName === "m0nesy" ? 2200000 : selectedPromo.searchName === "heavygod" ? 850000 : 1539410,
+        ...selectedPromo
+      })
+    }
+  }, [])
+
 
   const statsItems = [
     { value: "150+", label: t.hero.stats.players },
@@ -191,23 +246,20 @@ export function Hero() {
           </div>
         </div>
 
-        {/* RIGHT — player */}
+       {/* RIGHT — player */}
         <div className="order-3 flex flex-col justify-end lg:col-span-4">
           <div className="relative mx-auto w-full max-w-lg">
-            {/* orange neon glow radiating from player */}
             <div className="pointer-events-none absolute inset-0 -bottom-6 rounded-full bg-primary/25 blur-[90px]" />
 
-            {/* player image with neon outline emanating from the silhouette */}
             <div className="relative">
               <Image
-                src="/images/LUQi5dX9boyO0uDadUGht5.webp"
-                alt={lang === "ru" ? "Профессиональный игрок flamez в форме Team Vitality" : "Professional player flamez in Team Vitality uniform"}
+                src={featuredPlayer ? featuredPlayer.image : "/images/LUQi5dX9boyO0uDadUGht5.webp"}
+                alt="Pro player"
                 width={900}
                 height={900}
                 priority
                 className="relative z-[1] h-auto w-full scale-110 object-contain [filter:drop-shadow(0_0_14px_hsl(var(--primary)/0.9))_drop-shadow(0_0_36px_hsl(var(--primary)/0.6))]"
               />
-              {/* bottom fade into background */}
               <div className="pointer-events-none absolute inset-x-0 -bottom-1 z-[2] h-24 bg-gradient-to-t from-background to-transparent" />
             </div>
 
@@ -216,28 +268,24 @@ export function Hero() {
               
               {/* ПЛАШКА С ДИНАМИКОЙ */}
               <div className="pointer-events-none absolute bottom-full left-1/2 mb-3 w-[265px] -translate-x-1/2 rounded-lg border border-primary/40 bg-background/95 p-3 opacity-0 translate-y-2 scale-95 shadow-2xl transition-all duration-300 ease-out group-hover/card:pointer-events-auto group-hover/card:translate-y-0 group-hover/card:scale-100 group-hover/card:opacity-100 backdrop-blur-md z-30 box-glow">
-                
-                {/* Заголовок */}
                 <div className="mb-2 text-center">
                   <div className="font-display text-xs font-black uppercase tracking-widest text-primary text-glow">
                     {lang === "ru" ? "ДИНАМИКА" : "DYNAMICS"}
                   </div>
                 </div>
 
-                {/* Контейнер графика с фоновой сеткой */}
                 <div className="relative h-24 w-full border-b border-l border-muted-foreground/30 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:12px_12px]">
-                  
-                  {/* Шкала рейтинга слева */}
+                  {/* Шкала рейтинга */}
                   <div className="absolute left-1 inset-y-0 flex flex-col justify-between text-[7px] font-mono text-muted-foreground/70 text-left w-5 select-none z-20 pt-0.5">
-                    <span>1.40+</span>
-                    <span>1.30</span>
-                    <span>1.20</span>
-                    <span>1.10</span>
-                    <span>1.00</span>
+                    <span>{featuredPlayer ? featuredPlayer.scaleMax : "1.40+"}</span>
+                    <span>{featuredPlayer ? featuredPlayer.scaleMid1 : "1.30"}</span>
+                    <span>{featuredPlayer ? featuredPlayer.scaleMid2 : "1.20"}</span>
+                    <span>{featuredPlayer ? featuredPlayer.scaleMid3 : "1.10"}</span>
+                    <span>{featuredPlayer ? featuredPlayer.scaleMin : "1.00"}</span>
                     <span>0.90</span>
                   </div>
 
-                  {/* SVG-График биржи (адаптивный по сетке) */}
+                  {/* SVG-График */}
                   <svg className="absolute inset-0 z-10 h-full w-full overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <defs>
                       <linearGradient id="orange-glow" x1="0" y1="0" x2="0" y2="1">
@@ -245,16 +293,12 @@ export function Hero() {
                         <stop offset="100%" stopColor="#ff7a00" stopOpacity="0.0" />
                       </linearGradient>
                     </defs>
-                    
-                    {/* Заливка под линией тренда */}
                     <path
-                      d="M 12,62 L 29,56 L 46,70 L 63,52 L 81,34 L 100,46 L 100,100 L 12,100 Z"
+                      d={`${featuredPlayer ? featuredPlayer.graphPath : "M 12,62 L 29,56 L 46,70 L 63,52 L 81,34 L 100,46"} L 100,100 L 12,100 Z`}
                       fill="url(#orange-glow)"
                     />
-
-                    {/* Точная оранжевая линия графика по точкам */}
                     <path
-                      d="M 12,62 L 29,56 L 46,70 L 63,52 L 81,34 L 100,46"
+                      d={featuredPlayer ? featuredPlayer.graphPath : "M 12,62 L 29,56 L 46,70 L 63,52 L 81,34 L 100,46"}
                       fill="none"
                       stroke="#ff7a00"
                       strokeWidth="2"
@@ -264,45 +308,50 @@ export function Hero() {
                   </svg>
                 </div>
 
-                {/* Временная шкала внизу, выровненная по сетке */}
                 <div className="mt-1.5 flex justify-between text-[6px] font-mono tracking-tighter text-muted-foreground/60 uppercase pl-7 pr-0.5">
-                  <span>Янв 25</span>
-                  <span>Апр 25</span>
-                  <span>Июл 25</span>
-                  <span>Окт 25</span>
                   <span>Янв 26</span>
+                  <span>Фев 26</span>
+                  <span>Мар 26</span>
+                  <span>Апр 26</span>
+                  <span>Май 26</span>
                   <span>Июн 26</span>
                 </div>
               </div>
 
-              {/* Прорыв сезона */}
+              {/* Умный Бейдж с меняющимися иконками */}
               <div className="mb-4 flex justify-center">
                 <div className="inline-flex items-center gap-1.5 rounded-md bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-black shadow-lg shadow-primary/20">
-                  <TrendingUp className="size-3 text-black" />
-                  {lang === "ru" ? "Прорыв сезона" : "Breakthrough of the season"}
+                  {featuredPlayer?.icon === "awp" ? (
+                    <Crosshair className="size-3 text-black" />
+                  ) : featuredPlayer?.icon === "anchor" ? (
+                    <Shield className="size-3 text-black" />
+                  ) : (
+                    <TrendingUp className="size-3 text-black" />
+                  )}
+                  {lang === "ru" ? featuredPlayer?.badgeRu : featuredPlayer?.badgeEn}
                 </div>
               </div>
 
-              {/* Основной контент карточки (теперь цена берется из твоей модели расчетов) */}
+              {/* Информация игрока и цена из калькулятора */}
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="size-2 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary))]" />
                     <span className="font-display text-2xl font-bold uppercase tracking-wide">
-                      {flamezCard ? flamezCard.name : "flameZ"}
+                      {featuredPlayer ? featuredPlayer.name : "flameZ"}
                     </span>
                   </div>
                   <div className="mt-0.5 text-xs uppercase tracking-wider text-muted-foreground">
-                    {flamezCard ? `${flamezCard.team_name} · ${flamezCard.role}` : "Team Vitality · Rifler"}
+                    {featuredPlayer ? `${featuredPlayer.team_name} · ${featuredPlayer.role}` : "Team Vitality · Rifler"}
                   </div>
                 </div>
                 <div className="text-right">
                   <div className="font-display text-xl font-bold text-primary text-glow whitespace-nowrap">
-                    {flamezCard ? formatFullPrice(flamezCard.price) : "$1.9M"}
+                    {featuredPlayer ? formatFullPrice(featuredPlayer.price) : "$1.9M"}
                   </div>
                   <div className="flex items-center justify-end gap-1 text-xs text-primary">
                     <Activity className="size-3" />
-                    +12.4%
+                    {featuredPlayer?.searchName === "m0nesy" ? "+18.2%" : featuredPlayer?.searchName === "heavygod" ? "+8.1%" : "+12.4%"}
                   </div>
                 </div>
               </div>
@@ -310,7 +359,3 @@ export function Hero() {
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  )
-}
