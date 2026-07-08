@@ -1,12 +1,42 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
-import { ArrowRight, Calculator, Activity, TrendingUp } from "lucide-react"
+import { Search, Activity, TrendingUp } from "lucide-react"
 import { TopTeams } from "./top-teams"
 import { useLanguage } from "./language-provider"
 
+// Интерфейс для интеграции с твоим будущим файлом данных
+interface PlayerData {
+  id: string
+  nickname: string
+  fullName: string
+  teamLogo: string
+  teamName: string
+  price: number // Цена числом (например, 1900000)
+}
+
 export function Hero() {
   const { lang, t } = useLanguage()
+  const [searchTerm, setSearchTerm] = useState("")
+  const [isFocused, setIsFocused] = useState(false)
+
+  // Твой будущий массив данных из файла. Оставляю пустым, чтобы не плодить фейков.
+  const playersData: PlayerData[] = [] 
+
+  // Фильтрация: ищет совпадения, начиная с первых букв никнейма
+  const filteredPlayers = searchTerm.trim() === "" 
+    ? [] 
+    : playersData.filter(p => p.nickname.toLowerCase().startsWith(searchTerm.toLowerCase()))
+
+  // Вывод цены полностью до доллара без сокращений ($1,900,000)
+  const formatFullPrice = (price: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0
+    }).format(price)
+  }
 
   const statsItems = [
     { value: "150+", label: t.hero.stats.players },
@@ -43,18 +73,87 @@ export function Hero() {
             {t.hero.desc}
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a
-              href="#calc"
-              className="group inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-wide text-primary-foreground transition-all hover:brightness-110 box-glow"
-            >
-              <Calculator className="size-4" />
-              {t.hero.ctaStart}
-              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-            </a>
+          {/* ПОИСКОВАЯ ЗОНА */}
+          <div className="relative mt-8 flex items-center gap-4 z-40">
+            
+            {/* Оболочка инпута */}
+            <div className="relative flex-1 max-w-md">
+              <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                <Search className={`size-4 transition-colors ${isFocused ? 'text-primary' : 'text-muted-foreground/60'}`} />
+              </span>
+              <input
+                type="text"
+                placeholder={lang === "ru" ? "Поиск киберспортсмена..." : "Search pro player..."}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setTimeout(() => setIsFocused(false), 200)}
+                className="w-full rounded-lg border border-border bg-background/60 pl-10 pr-4 py-3 text-sm font-medium tracking-wide text-foreground placeholder:text-muted-foreground/50 outline-none transition-all focus:border-primary/80 focus:ring-1 focus:ring-primary/20 box-glow"
+              />
+
+              {/* РАСШИРЕННЫЙ ВЫПАДАЮЩИЙ СПИСОК РЕЗУЛЬТАТОВ */}
+              {isFocused && searchTerm.trim() !== "" && (
+                <div className="absolute top-full left-0 mt-2 w-[145%] rounded-xl border border-primary/30 bg-background/95 p-2 shadow-2xl backdrop-blur-md box-glow animate-in fade-in slide-in-from-top-1 duration-200">
+                  
+                  {filteredPlayers.length > 0 ? (
+                    /* Контейнер со скроллом */
+                    <div className="max-h-60 overflow-y-auto pr-1 select-none [scrollbar-width:thin] [scrollbar-color:rgba(255,122,0,0.3)_transparent]">
+                      {filteredPlayers.map((player) => (
+                        <div
+                          key={player.id}
+                          className="flex items-center justify-between rounded-lg p-2.5 transition-colors hover:bg-white/5 cursor-pointer"
+                        >
+                          {/* Слева: Штука крутить вверх/вниз + лого команды + никнейм */}
+                          <div className="flex items-center gap-3">
+                            {/* Штука для скролла / индикатор позиции */}
+                            <div className="flex flex-col gap-0.5 opacity-40">
+                              <span className="h-1 w-2 rounded-full bg-white" />
+                              <span className="h-1 w-2 rounded-full bg-white" />
+                            </div>
+
+                            {/* Логотип команды */}
+                            <div className="relative size-6 flex-shrink-0 items-center justify-center rounded bg-black/40 p-0.5 border border-white/5">
+                              <Image
+                                src={player.teamLogo}
+                                alt={player.teamName}
+                                width={24}
+                                height={24}
+                                className="object-contain"
+                              />
+                            </div>
+
+                            {/* Информация игрока */}
+                            <div>
+                              <div className="font-display text-sm font-bold text-foreground tracking-wide leading-none">
+                                {player.nickname}
+                              </div>
+                              <div className="text-[9px] text-muted-foreground uppercase tracking-wider mt-0.5">
+                                {player.fullName}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Справа: Цена полностью до цифры */}
+                          <div className="font-mono text-sm font-bold text-primary text-glow whitespace-nowrap pl-4">
+                            {formatFullPrice(player.price)}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    /* Пустой результат */
+                    <div className="py-6 text-center text-xs text-muted-foreground uppercase tracking-wider">
+                      {lang === "ru" ? "Игрок не найден" : "Player not found"}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Кнопка ВСЕ ИГРОКИ */}
             <a
               href="#players"
-              className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold uppercase tracking-wide text-foreground transition-colors hover:bg-secondary"
+              className="inline-flex items-center gap-2 rounded-lg border border-border bg-background/40 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-foreground transition-all hover:bg-secondary hover:border-primary/40"
             >
               {t.hero.ctaPlayers}
             </a>
@@ -130,7 +229,7 @@ export function Hero() {
                       </linearGradient>
                     </defs>
                     
-                    {/* Заливка под линией тренда (начинается с x=12, чтобы не перекрывать цифры) */}
+                    {/* Заливка под линией тренда */}
                     <path
                       d="M 12,62 L 29,56 L 46,70 L 63,52 L 81,34 L 100,46 L 100,100 L 12,100 Z"
                       fill="url(#orange-glow)"

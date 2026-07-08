@@ -9,6 +9,9 @@
   --font-display: var(--font-oswald), sans-serif;
   --font-mono: var(--font-mono-geist), monospace;
 
+  /* Добавляем брейкпоинт xs, который используется в statsItems */
+  --breakpoint-xs: 380px;
+
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -88,5 +91,20 @@
       linear-gradient(oklch(0.72 0.19 48 / 6%) 1px, transparent 1px),
       linear-gradient(90deg, oklch(0.72 0.19 48 / 6%) 1px, transparent 1px);
     background-size: 44px 44px;
+  }
+
+  /* Стилизация Webkit-скроллбара для выпадающего списка (Safari, Chrome, Edge) */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: oklch(0.72 0.19 48 / 30%);
+    border-radius: 9999px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.72 0.19 48 / 60%);
   }
 }
