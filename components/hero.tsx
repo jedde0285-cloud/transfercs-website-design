@@ -6,7 +6,7 @@ import { Search, Activity, TrendingUp } from "lucide-react"
 import { TopTeams } from "./top-teams"
 import { useLanguage } from "./language-provider"
 import { playersData } from "@/lib/players-data"
-import { calculatePrice } from "@/lib/pricing-model"
+import { calculatePrice } from "@/lib/pricing-model-players"
 
 // Интерфейс для интеграции с твоим будущим файлом данных
 interface PlayerData {
@@ -147,7 +147,7 @@ const filteredPlayers = searchTerm.trim() === ""
                       ))}
                     </div>
                   ) : (
-                    
+
                     /* Пустой результат */
                     <div className="py-6 text-center text-xs text-muted-foreground uppercase tracking-wider">
                       {lang === "ru" ? "Игрок не найден" : "Player not found"}
