@@ -102,33 +102,23 @@ const filteredPlayers = searchTerm.trim() === ""
                 <div className="absolute top-full left-0 mt-2 w-[145%] rounded-xl border border-primary/30 bg-card p-2 shadow-2xl z-50 box-glow animate-in fade-in slide-in-from-top-1 duration-200">
                   
                   {filteredPlayers.length > 0 ? (
-                    /* Контейнер со скроллом */
-                    <div className="max-h-60 overflow-y-auto pr-1 select-none [scrollbar-width:thin] [scrollbar-color:rgba(255,122,0,0.3)_transparent]">
+                    <div className="py-2 max-h-[280px] overflow-y-auto custom-scrollbar">
                       {filteredPlayers.map((player) => (
                         <div
-                          key={player.id}
-                          className="flex items-center justify-between rounded-lg p-2.5 transition-colors hover:bg-white/5 cursor-pointer"
+                          key={player.name}
+                          className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-white/[0.04] transition-colors cursor-pointer group"
                         >
-                          {/* Слева: Штука крутить вверх/вниз + лого команды + никнейм */}
+                          {/* Левая часть: Лого + Имя */}
                           <div className="flex items-center gap-3">
-                            {/* Штука для скролла / индикатор позиции */}
-                            <div className="flex flex-col gap-0.5 opacity-40">
-                              <span className="h-1 w-2 rounded-full bg-white" />
-                              <span className="h-1 w-2 rounded-full bg-white" />
-                            </div>
-
-                            {/* Логотип команды */}
-                            <div className="relative size-6 flex-shrink-0 items-center justify-center rounded bg-black/40 p-0.5 border border-white/5">
-                              <Image
+                            <div className="w-6 h-6 rounded bg-white/5 flex items-center justify-center p-1 border border-white/10 group-hover:border-white/20 transition-colors">
+                              <img
                                 src={player.teamLogo}
-                                alt={player.teamName}
-                                width={24}
-                                height={24}
-                                className="object-contain"
+                                alt={player.team_name}
+                                className="w-full h-full object-contain"
                               />
                             </div>
 
-                           {/* Информация игрока */}
+                            {/* Информация игрока */}
                             <div>
                               <div className="font-display text-sm font-bold text-foreground tracking-wide leading-none">
                                 {player.name}
@@ -142,15 +132,22 @@ const filteredPlayers = searchTerm.trim() === ""
                                 )}
                               </div>
                             </div>
+                          </div>
 
-                          {/* Справа: Цена полностью до цифры */}
-                          <div className="font-mono text-sm font-bold text-primary text-glow whitespace-nowrap pl-4">
-                            {formatFullPrice(player.price)}
+                          {/* Правая часть: Цена */}
+                          <div className="text-right">
+                            <div className="font-display text-xs font-medium text-muted-foreground leading-none">
+                              Est. Value
+                            </div>
+                            <div className="font-display text-sm font-bold text-primary tracking-wide mt-0.5">
+                              ${player.price.toLocaleString()}
+                            </div>
                           </div>
                         </div>
                       ))}
                     </div>
                   ) : (
+                    
                     /* Пустой результат */
                     <div className="py-6 text-center text-xs text-muted-foreground uppercase tracking-wider">
                       {lang === "ru" ? "Игрок не найден" : "Player not found"}
