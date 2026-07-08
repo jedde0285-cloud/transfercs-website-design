@@ -3,17 +3,16 @@
 import Image from "next/image"
 import { ArrowRight, Calculator, Activity, TrendingUp } from "lucide-react"
 import { TopTeams } from "./top-teams"
-import { useLanguage } from "./language-provider" // <-- Импортируем хук языка
+import { useLanguage } from "./language-provider"
 
 export function Hero() {
-  const { lang, t } = useLanguage() // <-- Подключаем переводы
+  const { lang, t } = useLanguage()
 
-  // Настройка динамического массива статистики из словаря
- const statsItems = [
+  const statsItems = [
     { value: "150+", label: t.hero.stats.players },
     { value: "30+", label: t.hero.stats.teams },
     { 
-      value: lang === "ru" ? "ТЕХНОЛОГИЯ" : "TECHNOLOGY", // <-- Теперь переводит и само слово-значение
+      value: lang === "ru" ? "ТЕХНОЛОГИЯ" : "TECHNOLOGY",
       label: t.hero.stats.model 
     },
   ]
@@ -65,10 +64,11 @@ export function Hero() {
           <div className="mt-10 grid max-w-md grid-cols-3 gap-4 border-t border-border/60 pt-6">
             {statsItems.map((s) => (
               <div key={s.label}>
-                <div className="font-display text-2xl font-bold text-foreground">
+                {/* Исправлено вылезание за рамки слова ТЕХНОЛОГИЯ с помощью изменения размера на mobile */}
+                <div className="font-display text-lg xs:text-xl sm:text-2xl font-bold text-foreground truncate break-words">
                   {s.value}
                 </div>
-                <div className="text-xs uppercase tracking-wider text-muted-foreground">
+                <div className="text-[10px] sm:text-xs uppercase tracking-wider text-muted-foreground whitespace-nowrap">
                   {s.label}
                 </div>
               </div>
@@ -82,7 +82,7 @@ export function Hero() {
             {/* orange neon glow radiating from player */}
             <div className="pointer-events-none absolute inset-0 -bottom-6 rounded-full bg-primary/25 blur-[90px]" />
 
-             {/* player image with neon outline emanating from the silhouette */}
+            {/* player image with neon outline emanating from the silhouette */}
             <div className="relative">
               <Image
                 src="/images/LUQi5dX9boyO0uDadUGht5.webp"
@@ -96,9 +96,84 @@ export function Hero() {
               <div className="pointer-events-none absolute inset-x-0 -bottom-1 z-[2] h-24 bg-gradient-to-t from-background to-transparent" />
             </div>
 
-            {/* nickname + price info UNDER the player */}
-            <div className="relative z-10 -mt-6 rounded-xl border border-primary/40 bg-background/75 p-5 backdrop-blur-md box-glow">
+            {/* КАРТОЧКА ИГРОКА С КЛАССОМ ИНТЕРАКТИВНОЙ ГРУППЫ (group/card) */}
+            <div className="group/card relative z-10 -mt-6 rounded-xl border border-primary/40 bg-background/75 p-5 backdrop-blur-md box-glow transition-all duration-300">
               
+              {/* ВЫПЛЫВАЮЩАЯ ПЛАШКА С ГРАФИКОМ БИРЖИ */}
+              <div className="pointer-events-none absolute bottom-full left-1/2 mb-3 w-[290px] -translate-x-1/2 rounded-lg border border-primary/40 bg-background/95 p-3 opacity-0 translate-y-2 scale-95 shadow-2xl transition-all duration-300 ease-out group-hover/card:pointer-events-auto group-hover/card:translate-y-0 group-hover/card:scale-100 group-hover/card:opacity-100 backdrop-blur-md z-30 box-glow">
+                
+                {/* Заголовок плашки */}
+                <div className="mb-2 text-center">
+                  <div className="font-display text-xs font-black uppercase tracking-widest text-primary text-glow">
+                    {lang === "ru" ? "ДИНАМИКА РЕЙТИНГА" : "RATING DYNAMICS"}
+                  </div>
+                </div>
+
+                {/* Контейнер графика с фоновой сеткой */}
+                <div className="relative h-28 w-full border-b border-l border-muted-foreground/30 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:16px_16px]">
+                  
+                  {/* Шкала рейтинга слева */}
+                  <div className="absolute -left-7 inset-y-0 flex flex-col justify-between text-[8px] font-mono text-muted-foreground/80 text-right w-6 pr-1 select-none">
+                    <span>1.40+</span>
+                    <span>1.30</span>
+                    <span>1.20</span>
+                    <span>1.10</span>
+                    <span>1.00</span>
+                    <span>0.90</span>
+                  </div>
+
+                  {/* SVG-График биржи (построен по твоим точкам) */}
+                  <svg className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    {/* Градиент под линией тренда */}
+                    <defs>
+                      <linearGradient id="chart-glow" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.25" />
+                        <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.0" />
+                      </linearGradient>
+                    </defs>
+                    
+                    {/* Заливка области под графиком */}
+                    <path
+                      d="M 2,62 L 20,56 L 40,70 L 60,52 L 80,34 L 98,46 L 98,100 L 2,100 Z"
+                      fill="url(#chart-glow)"
+                    />
+
+                    {/* Сама неоновая линия биржи */}
+                    <path
+                      d="M 2,62 L 20,56 L 40,70 L 60,52 L 80,34 L 98,46"
+                      fill="none"
+                      stroke="hsl(var(--primary))"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      style={{ filter: "drop-shadow(0px 0px 4px hsl(var(--primary)))" }}
+                    />
+
+                    {/* Точки на графике */}
+                    {[
+                      { x: 2, y: 62 }, { x: 20, y: 56 }, { x: 40, y: 70 },
+                      { x: 60, y: 52 }, { x: 80, y: 34 }, { x: 98, y: 46 }
+                    ].map((pt, idx) => (
+                      <circle
+                        key={idx}
+                        cx={pt.x}
+                        cy={pt.y}
+                        r="2"
+                        className="fill-background stroke-primary stroke-[1.5]"
+                      />
+                    ))}
+                  </svg>
+                </div>
+
+                {/* Шкала времени (оси X) внизу карточки */}
+                <div className="mt-1 flex justify-between px-1 text-[7px] font-mono tracking-tighter text-muted-foreground/70 uppercase">
+                  <span>Янв 25</span>
+                  <span>Июл 25</span>
+                  <span>Янв 26</span>
+                  <span>Июн 26</span>
+                </div>
+              </div>
+
               {/* Прорыв сезона */}
               <div className="mb-4 flex justify-center">
                 <div className="inline-flex items-center gap-1.5 rounded-md bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-black shadow-lg shadow-primary/20">
