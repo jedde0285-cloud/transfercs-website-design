@@ -7,6 +7,7 @@ import { TopTeams } from "./top-teams"
 import { useLanguage } from "./language-provider"
 import { playersData } from "@/lib/players-data"
 import { calculatePrice } from "@/lib/pricing-model-players"
+import { calculateCoachPrice } from "@/lib/pricing-model-coaches"
 
 // Интерфейс для интеграции с твоим будущим файлом данных
 interface PlayerData {
@@ -23,17 +24,25 @@ export function Hero() {
   const [searchTerm, setSearchTerm] = useState("")
   const [isFocused, setIsFocused] = useState(false)
 
-  // Твой будущий массив данных из файла. Оставляю пустым, чтобы не плодить фейков.
-  // 1. Берем игроков из базы и рассчитываем цену для каждого через твою модель
-const playersWithPrices = playersData.map(player => ({
-  ...player,
-  price: calculatePrice(player)
-}))
+  // Рассчитываем цены для всех на лету в зависимости от их роли (игрок или тренер)
+const playersWithPrices = playersData.map(person => {
+  if (person.role === "Coach") {
+    return {
+      ...person,
+      price: calculateCoachPrice(person as any)
+    }
+  }
+  
+  return {
+    ...person,
+    price: calculatePrice(person)
+  }
+})
 
-// 2. Фильтруем игроков по тому, что ввел пользователь в поиск
+// Фильтруем этот массив по вводу пользователя
 const filteredPlayers = searchTerm.trim() === "" 
   ? [] 
-  : playersWithPrices.filter(p => p.name.toLowerCase().startsWith(searchTerm.toLowerCase())) 
+  : playersWithPrices.filter(p => p.name.toLowerCase().startsWith(searchTerm.toLowerCase()))
 
   // Вывод цены полностью до доллара без сокращений ($1,900,000)
   const formatFullPrice = (price: number) => {
