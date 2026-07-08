@@ -5,6 +5,8 @@ import Image from "next/image"
 import { Search, Activity, TrendingUp } from "lucide-react"
 import { TopTeams } from "./top-teams"
 import { useLanguage } from "./language-provider"
+import { playersData } from "@/lib/players-data"
+import { calculatePrice } from "@/lib/pricing-model"
 
 // Интерфейс для интеграции с твоим будущим файлом данных
 interface PlayerData {
@@ -22,12 +24,16 @@ export function Hero() {
   const [isFocused, setIsFocused] = useState(false)
 
   // Твой будущий массив данных из файла. Оставляю пустым, чтобы не плодить фейков.
-  const playersData: PlayerData[] = [] 
+  // 1. Берем игроков из базы и рассчитываем цену для каждого через твою модель
+const playersWithPrices = playersData.map(player => ({
+  ...player,
+  price: calculatePrice(player)
+}))
 
-  // Фильтрация: ищет совпадения, начиная с первых букв никнейма
-  const filteredPlayers = searchTerm.trim() === "" 
-    ? [] 
-    : playersData.filter(p => p.nickname.toLowerCase().startsWith(searchTerm.toLowerCase()))
+// 2. Фильтруем игроков по тому, что ввел пользователь в поиск
+const filteredPlayers = searchTerm.trim() === "" 
+  ? [] 
+  : playersWithPrices.filter(p => p.name.toLowerCase().startsWith(searchTerm.toLowerCase())) 
 
   // Вывод цены полностью до доллара без сокращений ($1,900,000)
   const formatFullPrice = (price: number) => {
@@ -122,16 +128,20 @@ export function Hero() {
                               />
                             </div>
 
-                            {/* Информация игрока */}
+                           {/* Информация игрока */}
                             <div>
                               <div className="font-display text-sm font-bold text-foreground tracking-wide leading-none">
-                                {player.nickname}
+                                {player.name}
                               </div>
-                              <div className="text-[9px] text-muted-foreground uppercase tracking-wider mt-0.5">
-                                {player.fullName}
+                              <div className="text-[9px] text-muted-foreground uppercase tracking-wider mt-0.5 flex items-center gap-1.5">
+                                <span>{player.role} · {player.team_name}</span>
+                                {player.is_bench && (
+                                  <span className="px-1 py-0.5 bg-destructive/20 border border-destructive/40 text-destructive text-[8px] font-bold rounded uppercase tracking-wider normal-case">
+                                    Bench
+                                  </span>
+                                )}
                               </div>
                             </div>
-                          </div>
 
                           {/* Справа: Цена полностью до цифры */}
                           <div className="font-mono text-sm font-bold text-primary text-glow whitespace-nowrap pl-4">
