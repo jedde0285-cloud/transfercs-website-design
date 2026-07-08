@@ -98,18 +98,18 @@ export function Hero() {
             {/* КАРТОЧКА ИГРОКА */}
             <div className="group/card relative z-10 -mt-6 rounded-xl border border-primary/40 bg-background/75 p-5 backdrop-blur-md box-glow transition-all duration-300">
               
-              {/* ПЛАШКА С ДИНАМИКОЙ (Ширина немного увеличена до 265px) */}
+              {/* ПЛАШКА С ДИНАМИКОЙ (Ширина увеличена до 265px) */}
               <div className="pointer-events-none absolute bottom-full left-1/2 mb-3 w-[265px] -translate-x-1/2 rounded-lg border border-primary/40 bg-background/95 p-3 opacity-0 translate-y-2 scale-95 shadow-2xl transition-all duration-300 ease-out group-hover/card:pointer-events-auto group-hover/card:translate-y-0 group-hover/card:scale-100 group-hover/card:opacity-100 backdrop-blur-md z-30 box-glow">
                 
                 {/* Заголовок */}
-                <div className="mb-2 text-center">
+                <div className="mb-2 text-center relative z-20">
                   <div className="font-display text-xs font-black uppercase tracking-widest text-primary text-glow">
                     {lang === "ru" ? "ДИНАМИКА" : "DYNAMICS"}
                   </div>
                 </div>
 
                 {/* Контейнер графика с фоновой сеткой */}
-                <div className="relative h-24 w-full border-b border-l border-muted-foreground/30 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:12px_12px]">
+                <div className="relative h-24 w-full border-b border-l border-muted-foreground/30 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:12px_12px] overflow-visible">
                   
                   {/* Шкала рейтинга слева внутри сетки */}
                   <div className="absolute left-1 inset-y-0 flex flex-col justify-between text-[7px] font-mono text-muted-foreground/70 text-left w-5 select-none z-10 pt-0.5">
@@ -121,12 +121,12 @@ export function Hero() {
                     <span>0.90</span>
                   </div>
 
-                  {/* SVG-График биржи */}
-                  <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  {/* SVG-График биржи с фиксированными размерами */}
+                  <svg className="absolute inset-0 z-10 overflow-visible" height="96px" width="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <defs>
                       <linearGradient id="orange-chart-glow" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.15" />
-                        <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.0" />
+                        <stop offset="0%" stopColor="#ff7a00" stopOpacity="0.2" />
+                        <stop offset="100%" stopColor="#ff7a00" stopOpacity="0.0" />
                       </linearGradient>
                     </defs>
                     
@@ -136,21 +136,20 @@ export function Hero() {
                       fill="url(#orange-chart-glow)"
                     />
 
-                    {/* Яркая, но не пересвеченная оранжевая линия тренда */}
+                    {/* Насыщенная оранжевая линия тренда без размытия */}
                     <path
                       d="M 5,62 L 24,56 L 43,70 L 62,52 L 81,34 L 95,46"
                       fill="none"
-                      stroke="hsl(var(--primary))"
-                      strokeWidth="2"
+                      stroke="#ff7a00"
+                      strokeWidth="2.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      style={{ filter: "drop-shadow(0px 1px 2px rgba(255,122,0,0.5))" }}
                     />
                   </svg>
                 </div>
 
                 {/* Временная шкала со всеми месяцами */}
-                <div className="mt-1.5 flex justify-between text-[6px] font-mono tracking-tighter text-muted-foreground/60 uppercase px-0.5">
+                <div className="mt-1.5 flex justify-between text-[6px] font-mono tracking-tighter text-muted-foreground/60 uppercase px-0.5 relative z-20">
                   <span>Янв 25</span>
                   <span>Апр 25</span>
                   <span>Июл 25</span>
