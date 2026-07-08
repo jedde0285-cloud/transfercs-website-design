@@ -293,7 +293,7 @@ export function Hero() {
                     </span>
                   </div>
                   <div className="mt-0.5 text-xs uppercase tracking-wider text-muted-foreground">
-                    {flamezCard ? `${flamezCard.team_name} · {player.role}` : "Team Vitality · Rifler"}
+                    {flamezCard ? `${flamezCard.team_name} · ${flamezCard.role}` : "Team Vitality · Rifler"}
                   </div>
                 </div>
                 <div className="text-right">
