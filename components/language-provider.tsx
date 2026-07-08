@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState, type ReactNode } from "react"
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 
 export type Lang = "ru" | "en"
 
@@ -78,9 +78,23 @@ type LanguageContextValue = {
 }
 
 const LanguageContext = createContext<LanguageContextValue | null>(null)
-
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>("ru")
+  const [lang, setLangState] = useState<Lang>("ru")
+
+  // Читаем сохраненный язык из памяти браузера при первой загрузке
+  useEffect(() => {
+    const savedLang = localStorage.getItem("transfercs_lang") as Lang
+    if (savedLang && (savedLang === "ru" || savedLang === "en")) {
+      setLangState(savedLang)
+    }
+  }, [])
+
+  // Кастомная функция смены языка, которая сразу пишет его в localStorage
+  const setLang = (newLang: Lang) => {
+    setLangState(newLang)
+    localStorage.setItem("transfercs_lang", newLang)
+  }
+
   return (
     <LanguageContext.Provider value={{ lang, setLang, t: dictionaries[lang] }}>
       {children}
