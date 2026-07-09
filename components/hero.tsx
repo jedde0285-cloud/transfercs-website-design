@@ -305,7 +305,7 @@ export function Hero() {
                       d={featuredPlayer ? featuredPlayer.graphPath : "M 12,62 L 29,56 L 46,70 L 63,52 L 81,34 L 100,46"}
                       fill="none"
                       stroke="#ff7a00"
-                      strokeWidth="2"
+                      strokeWidth="1"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
