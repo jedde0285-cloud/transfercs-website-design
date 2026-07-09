@@ -29,7 +29,6 @@ function getRoleCoef(role: string, rating: number): number {
 // 3. КОЭФФИЦИЕНТ ВОЗРАСТА
 // ==========================
 function getAgeCoef(age: number, role: string): number {
-  if (role === "Coach") return 1.00; // Для тренеров возраст не так критичен
   if (role === "IGL" && age >= 30) return 0.65;
   if (age <= 16) return 1.35;
   if (age <= 23) return 1.35 - (age - 16) * 0.05;
