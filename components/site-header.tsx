@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link" // <-- Импортируем быстрые ссылки Next.js
 import { useLanguage } from "./language-provider"
-import { Menu, X, Crosshair, Shield, User, Info, Newspaper } from "lucide-react"
+import { Menu, X, Crosshair, Shield, User, Info, Newspaper, Briefcase } from "lucide-react"
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
@@ -12,7 +12,7 @@ export function SiteHeader() {
    // Массив навигации в components/site-header.tsx
   const navItems = [
     { label: t.nav.calc, href: "/news", icon: Newspaper }, // <-- ЗАМЕНИЛИ t.nav.news НА t.nav.calc
-    { label: t.nav.teams, href: "#teams", icon: Shield },
+    { label: t.nav.teams, href: "#teams", icon: Briefcase },
     { label: t.nav.players, href: "#players", icon: User },
     { label: t.nav.about, href: "#about", icon: Info },
   ]
