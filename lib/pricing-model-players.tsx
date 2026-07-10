@@ -6,7 +6,7 @@ export interface CustomPlayerStats extends PlayerStats {
   country?: string;
   is_bench?: boolean;
   // Наш новый маркер: ручной множитель сцены при переходе из более слабой команды
-  previous_team_multiplier?: number; 
+  previous_team_multiplier?: number;
 }
 
 export interface PlayerWithPrice extends CustomPlayerStats {
@@ -19,7 +19,7 @@ export interface PlayerWithPrice extends CustomPlayerStats {
 // Сюда ты можешь в любой момент дописывать новые команды (строго маленькими буквами для защиты от ошибок регистра)
 const teamTierMultipliers: Record<string, number> = {
   // Тир-1 команды (1.0)
-  "vitality": 1.0, "falcons": 1.0, "furia": 1.0, "navi": 1.0, 
+  "vitality": 1.0, "falcons": 1.0, "furia": 1.0, "natus vincere": 1.0,
   "spirit": 1.0, "mouz": 1.0, "aurora": 1.0, "g2": 1.0, "the mongolz": 1.0,
 
   // Тир-1.5 команды (0.95)
@@ -53,7 +53,7 @@ function getBasePrice(rating: number, role: string): number {
     const startPrice = isIGL ? 150000 : 100000;
     return startPrice + (rating - 0.90) * 200000;
   }
-  
+
   // Для остальных категорий базовая стоимость остается прежней
   if (rating < 1.10) return 250000 + (rating - 1.00) * 500000;
   if (rating < 1.20) return 600000 + (rating - 1.10) * 1000000;
@@ -76,7 +76,7 @@ function getAgeCoef(age: number, role: string): number {
   if (role === "IGL" && age >= 30) return 0.65;
   if (age <= 16) return 1.35;
   if (age <= 23) return 1.35 - (age - 16) * 0.05;
-  
+
   const coef = 1.0 - (age - 23) * 0.02;
   return Math.max(0.65, coef);
 }
@@ -129,7 +129,7 @@ function getSceneMultiplier(player: CustomPlayerStats): number {
 
   // Если маркера нет, рассчитываем стандартно по текущей команде
   const teamNameClean = (player.team_name || "").toLowerCase().trim();
-  
+
   // Ищем команду в нашем списке. Если нашли — берем её тир, если нет — дефолтный тир-4 (0.60)
   return teamTierMultipliers[teamNameClean] !== undefined ? teamTierMultipliers[teamNameClean] : 0.60;
 }
@@ -178,12 +178,12 @@ export function calculatePrice(player: CustomPlayerStats): number {
 
   const basePrice = getBasePrice(rating, role); // Передаем роль для учета IGL наценки
   const roleCoef = getRoleCoef(role, rating);
-  
+
   let ageCoef = getAgeCoef(age, role);
   ageCoef = applyBubbleProtection(basePrice, age, ageCoef);
-  
+
   const experienceBonus = getExperienceBonus(player);
-  
+
   // В третьих и пятых: теперь множитель сцены зависит от игрока и его маркера/команды
   const sceneMult = getSceneMultiplier(player);
   const regionMult = getRegionMultiplier(teamRank, region);
