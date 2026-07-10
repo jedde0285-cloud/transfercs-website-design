@@ -1046,7 +1046,7 @@ export const playersData: PlayerStats[] = [
     "trophies_s": 0,
     "trophies_a": 2,
     "trophies_last_3_years": 0,
-    "tactics": 2,
+    "tactics": 0,
     "development": 0,
     "is_bench": true,
     "teamLogo": "/images/astralis-logo.webp"
