@@ -1941,7 +1941,7 @@ export const playersData: PlayerStats[] = [
     "popularity": 1.15,
     "trophies_s": 0,
     "trophies_a": 0,
-    "previous_team_multiplier": 0.50,
+    "previous_team_multiplier": 0.40,
     "teamLogo": "/images/faze-logo.webp"
   },
   {
