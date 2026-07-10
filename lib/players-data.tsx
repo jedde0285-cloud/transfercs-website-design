@@ -769,8 +769,8 @@ export const playersData: PlayerStats[] = [
     "popularity": 1.30,
     "trophies_s": 0,
     "trophies_a": 1,
+    "is_bench": true,
     "teamLogo": "/images/aurora-logo.webp"
-    "is_bench": true
   },
   {
     "name": "XANTARES",
@@ -818,7 +818,7 @@ export const playersData: PlayerStats[] = [
     "popularity": 1.10,
     "trophies_s": 0,
     "trophies_a": 0,
-    "is_bench": true
+    "is_bench": true,
     "teamLogo": "/images/aurora-logo.webp"
   },
   {
@@ -852,7 +852,7 @@ export const playersData: PlayerStats[] = [
     "trophies_last_3_years": 1,
     "tactics": 0,
     "development": 0,
-    "is_bench": true
+    "is_bench": true,
     "teamLogo": "/images/aurora-logo.webp"
   },
   {
@@ -1048,8 +1048,8 @@ export const playersData: PlayerStats[] = [
     "trophies_last_3_years": 0,
     "tactics": 2,
     "development": 0,
+    "is_bench": true,
     "teamLogo": "/images/astralis-logo.webp"
-    "is_bench": true
   },
   {
     "name": "huNter-",
@@ -1211,8 +1211,8 @@ export const playersData: PlayerStats[] = [
     "popularity": 1.25,
     "trophies_s": 0,
     "trophies_a": 1,
+    "is_bench": true,
     "teamLogo": "/images/fut-logo.webp"
-    "is_bench": true
   },
   {
     "name": "Krabeni",
@@ -2804,8 +2804,8 @@ export const playersData: PlayerStats[] = [
     "popularity": 1.15,
     "trophies_s": 0,
     "trophies_a": 0,
+    "is_bench": true,
     "teamLogo": "/images/liquid-logo.webp"
-    "is_bench": true
 },
 {
     "name": "Jorko",
