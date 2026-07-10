@@ -18,7 +18,7 @@ export interface PlayerStats {
   development?: number;
   trophies_last_3_years?: number;
   teamLogo: string;
-  previous_team_multiplier?: number
+  previous_team_multiplier?: number;
   
   // Добавляем флаг бенча:
   is_bench?: boolean; 
@@ -1097,8 +1097,8 @@ export const playersData: PlayerStats[] = [
     "popularity": 1.20,
     "trophies_s": 0,
     "trophies_a": 0,
+    "previous_team_multiplier": 0.85,
     "teamLogo": "/images/g2-logo.webp"
-    "previous_team_multiplier": 0.85
   },
   {
     "name": "SunPayus",
@@ -1941,6 +1941,7 @@ export const playersData: PlayerStats[] = [
     "popularity": 1.15,
     "trophies_s": 0,
     "trophies_a": 0,
+    "previous_team_multiplier": 0.60,
     "teamLogo": "/images/faze-logo.webp"
   },
   {
@@ -2362,8 +2363,8 @@ export const playersData: PlayerStats[] = [
     "popularity": 1.20,
     "trophies_s": 0,
     "trophies_a": 0,
+    "previous_team_multiplier": 0.75,
     "teamLogo": "/images/heroic-logo.webp"
-    "previous_team_multiplier": 0.75
   },
   {
     "name": "TOBIZ",
@@ -2477,8 +2478,8 @@ export const playersData: PlayerStats[] = [
     "popularity": 1.00,
     "trophies_s": 0,
     "trophies_a": 0,
+    "previous_team_multiplier": 0.60,
     "teamLogo": "/images/nip-logo.webp"
-    "previous_team_multiplier": 0.60
   },
   {
     "name": "Xizt",
@@ -2821,8 +2822,8 @@ export const playersData: PlayerStats[] = [
     "popularity": 1.05,
     "trophies_s": 0,
     "trophies_a": 0,
+    "previous_team_multiplier": 0.65,
     "teamLogo": "/images/liquid-logo.webp"
-    "previous_team_multiplier": 0.65
   },
   {
     "name": "siuhy",
