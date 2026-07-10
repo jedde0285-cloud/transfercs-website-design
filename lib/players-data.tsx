@@ -1193,7 +1193,7 @@ export const playersData: PlayerStats[] = [
     "team_name": "FUT",
     "team_rank": 12,
     "region": "EU",
-    "popularity": 1.15,
+    "popularity": 1.20,
     "trophies_s": 0,
     "trophies_a": 0,
     "teamLogo": "/images/fut-logo.webp"
@@ -1209,7 +1209,7 @@ export const playersData: PlayerStats[] = [
     "team_name": "FUT",
     "team_rank": 12,
     "region": "EU",
-    "popularity": 1.25,
+    "popularity": 1.15,
     "trophies_s": 0,
     "trophies_a": 1,
     "is_bench": true,
