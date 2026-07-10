@@ -1228,7 +1228,7 @@ export const playersData: PlayerStats[] = [
   {
     "name": "dziugss",
     "role": "Rifler",
-    "age": 27,
+    "age": 17,
     "rating": 1.10,
     "trophies": 1,
     "majors": 1,
