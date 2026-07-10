@@ -1114,6 +1114,7 @@ export const playersData: PlayerStats[] = [
     "popularity": 1.40,
     "trophies_s": 0,
     "trophies_a": 2,
+    "is_bench": true,
     "teamLogo": "/images/g2-logo.webp"
   },
   {
@@ -1189,13 +1190,13 @@ export const playersData: PlayerStats[] = [
     "trophies": 0,
     "majors": 3,
     "maps": 948,
-    "team_name": "HEROIC",
-    "team_rank": 23,
+    "team_name": "FUT",
+    "team_rank": 12,
     "region": "EU",
     "popularity": 1.15,
     "trophies_s": 0,
     "trophies_a": 0,
-    "teamLogo": "/images/heroic-logo.webp"
+    "teamLogo": "/images/fut-logo.webp"
   },
   {
     "name": "lauNX",
