@@ -23,7 +23,7 @@ const teamTierMultipliers: Record<string, number> = {
   "spirit": 1.0, "mouz": 1.0, "aurora": 1.0, "g2": 1.0, "the mongolz": 1.0,
 
   // Тир-1.5 команды (0.95)
-  "fut": 0.95, "astralis": 0.95, "faze": 0.95, "betboom": 0.95, "gamerlegion": 0.95, "parivision": 0.95, "9z": 0.95
+  "fut": 0.95, "astralis": 0.95, "faze": 0.95, "betboom": 0.95, "gamerlegion": 0.95, "parivision": 0.95, "9z": 0.95,
 
   // Тир-2 команды (0.90)
   "3dmax": 0.90, "legacy": 0.90, "mibr": 0.90, "luminosity": 0.90, "pain": 0.90,
