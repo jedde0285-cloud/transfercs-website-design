@@ -65,7 +65,7 @@ function getBasePrice(rating: number, role: string): number {
 // 2. КОЭФФИЦИЕНТ РОЛИ
 // ==========================
 function getRoleCoef(role: string, rating: number): number {
-  if (role === "AWP" && rating > 1.05) return 1.10;
+  if (role === "AWP" && rating > 1.00) return 1.10;
   return 1.00;
 }
 
