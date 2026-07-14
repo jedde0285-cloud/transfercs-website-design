@@ -1,11 +1,11 @@
 // src/lib/pricing-model.ts
 import { PlayerStats } from "./players-data";
 
-// Расширяем интерфейс PlayerStats, чтобы TypeScript не ругался на новые маркеры в базе данных
+//
 export interface CustomPlayerStats extends PlayerStats {
   country?: string;
   is_bench?: boolean;
-  // Наш новый маркер: ручной множитель сцены при переходе из более слабой команды
+  // Маркер: ручной множитель сцены при переходе из более слабой команды
   previous_team_multiplier?: number;
 }
 
@@ -16,7 +16,7 @@ export interface PlayerWithPrice extends CustomPlayerStats {
 // ==========================================
 // ТИР-СИСТЕМА КОМАНД ДЛЯ МНОЖИТЕЛЯ СЦЕНЫ
 // ==========================================
-// Сюда ты можешь в любой момент дописывать новые команды (строго маленькими буквами для защиты от ошибок регистра)
+
 const teamTierMultipliers: Record<string, number> = {
   // Тир-1 команды (1.0)
   "vitality": 1.0, "falcons": 1.0, "furia": 1.0, "natus vincere": 1.0,
@@ -39,7 +39,7 @@ const teamTierMultipliers: Record<string, number> = {
 };
 
 // ==========================================
-// 1. БАЗОВАЯ СТОИМОСТЬ ИГРОКА (С УЧЕТОМ IGL)
+// 1. БАЗОВАЯ СТОИМОСТЬ ИГРОКА
 // ==========================================
 function getBasePrice(rating: number, role: string): number {
   const isIGL = role === "IGL";
