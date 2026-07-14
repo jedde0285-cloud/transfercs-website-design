@@ -1427,22 +1427,6 @@ export const playersData: PlayerStats[] = [
     "teamLogo": "/images/gamerlegion-logo.webp"
   },
   {
-    "name": "PR",
-    "role": "Rifler",
-    "age": 18,
-    "rating": 1.06,
-    "trophies": 0,
-    "majors": 2,
-    "maps": 717,
-    "team_name": "GamerLegion",
-    "team_rank": 14,
-    "region": "EU",
-    "popularity": 1.35,
-    "trophies_s": 0,
-    "trophies_a": 0,
-    "teamLogo": "/images/gamerlegion-logo.webp"
-  },
-  {
     "name": "hypex",
     "role": "AWP",
     "age": 22,
