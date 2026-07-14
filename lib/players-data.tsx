@@ -578,19 +578,20 @@ export const playersData: PlayerStats[] = [
     "teamLogo": "/images/mouz-logo.webp"
   },
   {
-    "name": "jL",
+    "name": "PR",
     "role": "Rifler",
-    "age": 26,
+    "age": 18,
     "rating": 1.06,
-    "trophies": 4,
-    "majors": 4,
-    "maps": 956,
+    "trophies": 0,
+    "majors": 2,
+    "maps": 717,
     "team_name": "MOUZ",
     "team_rank": 6,
     "region": "EU",
-    "popularity": 1.60,
-    "trophies_s": 1,
-    "trophies_a": 3,
+    "popularity": 1.15,
+    "trophies_s": 0,
+    "trophies_a": 0,
+    "previous_team_multiplier": 0.95,
     "teamLogo": "/images/mouz-logo.webp"
   },
   {
