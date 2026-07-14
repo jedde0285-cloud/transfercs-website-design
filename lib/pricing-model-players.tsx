@@ -183,7 +183,7 @@ export function calculatePrice(player: CustomPlayerStats): number {
   const region = player.region || "EU";
   const rating = player.rating || 1.0;
 
-  // Во вторых: полностью вырезали блок `if (role === "Coach")`, теперь код работает только с игроками
+  // 
 
   const basePrice = getBasePrice(rating, role); // Передаем роль для учета IGL наценки
   const roleCoef = getRoleCoef(role, rating);
@@ -193,7 +193,7 @@ export function calculatePrice(player: CustomPlayerStats): number {
 
   const experienceBonus = getExperienceBonus(player);
 
-  // В третьих и пятых: теперь множитель сцены зависит от игрока и его маркера/команды
+  // 
   const sceneMult = getSceneMultiplier(player);
   const regionMult = getRegionMultiplier(teamRank, region);
   const popularity = getPopularityMultiplier(player);
@@ -202,7 +202,7 @@ export function calculatePrice(player: CustomPlayerStats): number {
     basePrice * roleCoef * ageCoef * popularity * sceneMult * regionMult +
     experienceBonus;
 
-  // В первых: Полностью удален блок снижения стоимости `if (player.is_bench) price *= 0.60;`
+  // 
 
   return Math.round(price);
 }
