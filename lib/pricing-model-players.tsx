@@ -93,8 +93,10 @@ function applyBubbleProtection(basePrice: number, age: number, ageCoef: number):
 // 5. НАДБАВКА ЗА ОПЫТ
 // ==========================
 function getExperienceBonus(player: CustomPlayerStats): number {
-  const { age, role, trophies_s = 0, trophies_a = 0, maps = 0 } = player;
+  // Достаем majors из данных игрока (если его нет в базе у кого-то, по дефолту будет 0)
+  const { age, role, trophies_s = 0, trophies_a = 0, maps = 0, majors = 0 } = player;
 
+  // Расчет бонуса за кубки
   let trophyBonus = trophies_s * 40000 + trophies_a * 20000;
 
   let relevance: number;
@@ -104,8 +106,13 @@ function getExperienceBonus(player: CustomPlayerStats): number {
   else if (age <= 27) relevance = 0.8;
   else relevance = 0.4;
 
+  // Применяем коэффициент актуальности только к кубкам
   trophyBonus *= relevance;
 
+  // Расчет бонуса за мажоры (по $10,000 за каждый)
+  const majorBonus = (majors || 0) * 10000;
+
+  // Расчет стоимости сыгранных карт
   let mapPrice: number;
   if (age <= 16) mapPrice = 200;
   else if (age <= 25) mapPrice = 200 - (age - 16) * 10;
@@ -115,7 +122,9 @@ function getExperienceBonus(player: CustomPlayerStats): number {
   }
 
   const mapBonus = (maps || 0) * mapPrice;
-  return trophyBonus + mapBonus;
+
+  // Суммируем все три бонуса к опыту
+  return trophyBonus + majorBonus + mapBonus;
 }
 
 // ============================================
