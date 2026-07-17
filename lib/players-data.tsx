@@ -18,6 +18,7 @@ export interface PlayerStats {
   development?: number;
   trophies_last_3_years?: number;
   teamLogo: string;
+  previous_team_multiplier?: number;
   
   // Добавляем флаг бенча:
   is_bench?: boolean; 
@@ -228,14 +229,13 @@ export const playersData: PlayerStats[] = [
     "trophies": 1,
     "majors": 5,
     "maps": 1198,
-    "team_name": "Falcons",
-    "team_rank": 2,
+    "team_name": "Aurora",
+    "team_rank": 8,
     "region": "EU",
     "popularity": 1.35,
     "trophies_s": 0,
     "trophies_a": 1,
-    "teamLogo": "/images/falcons-logo.webp",
-    "is_bench": true
+    "teamLogo": "/images/aurora-logo.webp",
   },
   {
     "name": "sh1ro",
@@ -578,19 +578,20 @@ export const playersData: PlayerStats[] = [
     "teamLogo": "/images/mouz-logo.webp"
   },
   {
-    "name": "jL",
+    "name": "PR",
     "role": "Rifler",
-    "age": 26,
+    "age": 18,
     "rating": 1.06,
-    "trophies": 4,
-    "majors": 4,
-    "maps": 956,
+    "trophies": 0,
+    "majors": 2,
+    "maps": 717,
     "team_name": "MOUZ",
     "team_rank": 6,
     "region": "EU",
-    "popularity": 1.60,
-    "trophies_s": 1,
-    "trophies_a": 3,
+    "popularity": 1.15,
+    "trophies_s": 0,
+    "trophies_a": 0,
+    "previous_team_multiplier": 0.95,
     "teamLogo": "/images/mouz-logo.webp"
   },
   {
@@ -643,23 +644,6 @@ export const playersData: PlayerStats[] = [
     "teamLogo": "/images/mouz-logo.webp"
   },
   {
-    "name": "Brollan",
-    "role": "IGL",
-    "age": 24,
-    "rating": 0.99,
-    "trophies": 5,
-    "majors": 9,
-    "maps": 1609,
-    "team_name": "MOUZ",
-    "team_rank": 6,
-    "region": "EU",
-    "popularity": 1.30,
-    "trophies_s": 0,
-    "trophies_a": 5,
-    "teamLogo": "/images/mouz-logo.webp",
-    "is_bench": true
-  },
-  {
     "name": "Jimpphat",
     "role": "Rifler",
     "age": 19,
@@ -667,14 +651,13 @@ export const playersData: PlayerStats[] = [
     "trophies": 4,
     "majors": 4,
     "maps": 852,
-    "team_name": "MOUZ",
-    "team_rank": 6,
+    "team_name": "Aurora",
+    "team_rank": 8,
     "region": "EU",
     "popularity": 1.30,
     "trophies_s": 0,
     "trophies_a": 4,
-    "teamLogo": "/images/mouz-logo.webp",
-    "is_bench": true
+    "teamLogo": "/images/aurora-logo.webp",
   },
   {
     "name": "Jame",
@@ -787,6 +770,7 @@ export const playersData: PlayerStats[] = [
     "popularity": 1.30,
     "trophies_s": 0,
     "trophies_a": 1,
+    "is_bench": true,
     "teamLogo": "/images/aurora-logo.webp"
   },
   {
@@ -835,6 +819,7 @@ export const playersData: PlayerStats[] = [
     "popularity": 1.10,
     "trophies_s": 0,
     "trophies_a": 0,
+    "is_bench": true,
     "teamLogo": "/images/aurora-logo.webp"
   },
   {
@@ -868,6 +853,24 @@ export const playersData: PlayerStats[] = [
     "trophies_last_3_years": 1,
     "tactics": 0,
     "development": 0,
+    "is_bench": true,
+    "teamLogo": "/images/aurora-logo.webp"
+  },
+  {
+    "name": "ash",
+    "role": "Coach",
+    "age": 35,
+    "trophies": 0,
+    "majors": 5,
+    "team_name": "Aurora",
+    "team_rank": 8,
+    "region": "EU",
+    "popularity": 1.10,
+    "trophies_s": 0,
+    "trophies_a": 0,
+    "trophies_last_3_years": 0,
+    "tactics": 1,
+    "development": 2,
     "teamLogo": "/images/aurora-logo.webp"
   },
   {
@@ -898,22 +901,6 @@ export const playersData: PlayerStats[] = [
     "team_rank": 9,
     "region": "AS",
     "popularity": 1.20,
-    "trophies_s": 0,
-    "trophies_a": 2,
-    "teamLogo": "/images/mongolz-logo.webp"
-  },
-  {
-    "name": "mzinho",
-    "role": "Rifler",
-    "age": 18,
-    "rating": 1.04,
-    "trophies": 2,
-    "majors": 5,
-    "maps": 594,
-    "team_name": "The MongolZ",
-    "team_rank": 9,
-    "region": "AS",
-    "popularity": 1.40,
     "trophies_s": 0,
     "trophies_a": 2,
     "teamLogo": "/images/mongolz-logo.webp"
@@ -1060,8 +1047,9 @@ export const playersData: PlayerStats[] = [
     "trophies_s": 0,
     "trophies_a": 2,
     "trophies_last_3_years": 0,
-    "tactics": 2,
+    "tactics": 0,
     "development": 0,
+    "is_bench": true,
     "teamLogo": "/images/astralis-logo.webp"
   },
   {
@@ -1097,6 +1085,23 @@ export const playersData: PlayerStats[] = [
     "teamLogo": "/images/g2-logo.webp"
   },
   {
+    "name": "r1nkle",
+    "role": "AWP",
+    "age": 21,
+    "rating": 1.08,
+    "trophies": 0,
+    "majors": 1,
+    "maps": 875,
+    "team_name": "G2",
+    "team_rank": 11,
+    "region": "EU",
+    "popularity": 1.20,
+    "trophies_s": 0,
+    "trophies_a": 0,
+    "previous_team_multiplier": 0.85,
+    "teamLogo": "/images/g2-logo.webp"
+  },
+  {
     "name": "SunPayus",
     "role": "AWP",
     "age": 27,
@@ -1110,6 +1115,7 @@ export const playersData: PlayerStats[] = [
     "popularity": 1.40,
     "trophies_s": 0,
     "trophies_a": 2,
+    "is_bench": true,
     "teamLogo": "/images/g2-logo.webp"
   },
   {
@@ -1178,6 +1184,22 @@ export const playersData: PlayerStats[] = [
     "teamLogo": "/images/fut-logo.webp"
   },
   {
+  "name": "xfl0ud",
+    "role": "Rifler",
+    "age": 23,
+    "rating": 1.08,
+    "trophies": 0,
+    "majors": 3,
+    "maps": 948,
+    "team_name": "FUT",
+    "team_rank": 12,
+    "region": "EU",
+    "popularity": 1.20,
+    "trophies_s": 0,
+    "trophies_a": 0,
+    "teamLogo": "/images/fut-logo.webp"
+  },
+  {
     "name": "lauNX",
     "role": "Rifler",
     "age": 21,
@@ -1188,9 +1210,10 @@ export const playersData: PlayerStats[] = [
     "team_name": "FUT",
     "team_rank": 12,
     "region": "EU",
-    "popularity": 1.25,
+    "popularity": 1.15,
     "trophies_s": 0,
     "trophies_a": 1,
+    "is_bench": true,
     "teamLogo": "/images/fut-logo.webp"
   },
   {
@@ -1228,7 +1251,7 @@ export const playersData: PlayerStats[] = [
   {
     "name": "dziugss",
     "role": "Rifler",
-    "age": 27,
+    "age": 17,
     "rating": 1.10,
     "trophies": 1,
     "majors": 1,
@@ -1399,22 +1422,6 @@ export const playersData: PlayerStats[] = [
     "team_rank": 14,
     "region": "EU",
     "popularity": 1.15,
-    "trophies_s": 0,
-    "trophies_a": 0,
-    "teamLogo": "/images/gamerlegion-logo.webp"
-  },
-  {
-    "name": "PR",
-    "role": "Rifler",
-    "age": 18,
-    "rating": 1.06,
-    "trophies": 0,
-    "majors": 2,
-    "maps": 717,
-    "team_name": "GamerLegion",
-    "team_rank": 14,
-    "region": "EU",
-    "popularity": 1.35,
     "trophies_s": 0,
     "trophies_a": 0,
     "teamLogo": "/images/gamerlegion-logo.webp"
@@ -1745,13 +1752,13 @@ export const playersData: PlayerStats[] = [
     "teamLogo": "/images/mibr-logo.webp"
   },
   {
-    "name": "kl1m",
+    "name": "nqz",
     "role": "AWP",
-    "age": 20,
-    "rating": 1.22,
+    "age": 21,
+    "rating": 1.16,
     "trophies": 0,
-    "majors": 2,
-    "maps": 230,
+    "majors": 5,
+    "maps": 970,
     "team_name": "MIBR",
     "team_rank": 17,
     "region": "SA",
@@ -1778,20 +1785,20 @@ export const playersData: PlayerStats[] = [
     "teamLogo": "/images/mibr-logo.webp"
   },
   {
-    "name": "Gizmy",
+    "name": "lux",
     "role": "IGL",
-    "age": 22,
-    "rating": 0.95,
-    "trophies": 0,
-    "majors": 1,
-    "maps": 838,
-    "team_name": "Monte",
+    "age": 24,
+    "rating": 0.96,
+    "trophies": 1,
+    "majors": 4,
+    "maps": 935,
+    "team_name": "Luminosity",
     "team_rank": 18,
     "region": "EU",
-    "popularity": 1.10,
+    "popularity": 1.20,
     "trophies_s": 0,
-    "trophies_a": 0,
-    "teamLogo": "/images/monte-logo.webp"
+    "trophies_a": 1,
+    "teamLogo": "/images/luminosity-logo.webp"
   },
   {
     "name": "afro",
@@ -1801,13 +1808,13 @@ export const playersData: PlayerStats[] = [
     "trophies": 0,
     "majors": 1,
     "maps": 1365,
-    "team_name": "Monte",
+    "team_name": "Luminosity",
     "team_rank": 18,
     "region": "EU",
     "popularity": 1.15,
     "trophies_s": 0,
     "trophies_a": 0,
-    "teamLogo": "/images/monte-logo.webp"
+    "teamLogo": "/images/luminosity-logo.webp"
   },
   {
     "name": "Rainwaker",
@@ -1817,13 +1824,13 @@ export const playersData: PlayerStats[] = [
     "trophies": 0,
     "majors": 1,
     "maps": 2058,
-    "team_name": "Monte",
+    "team_name": "Luminosity",
     "team_rank": 18,
     "region": "EU",
     "popularity": 1.20,
     "trophies_s": 0,
     "trophies_a": 0,
-    "teamLogo": "/images/monte-logo.webp"
+    "teamLogo": "/images/luminosity-logo.webp"
   },
   {
     "name": "AZUWU",
@@ -1833,13 +1840,13 @@ export const playersData: PlayerStats[] = [
     "trophies": 0,
     "majors": 1,
     "maps": 901,
-    "team_name": "Monte",
+    "team_name": "Luminosity",
     "team_rank": 18,
     "region": "EU",
     "popularity": 1.10,
     "trophies_s": 0,
     "trophies_a": 0,
-    "teamLogo": "/images/monte-logo.webp"
+    "teamLogo": "/images/luminosity-logo.webp"
   },
   {
     "name": "Bymas",
@@ -1849,13 +1856,13 @@ export const playersData: PlayerStats[] = [
     "trophies": 1,
     "majors": 2,
     "maps": 790,
-    "team_name": "Monte",
+    "team_name": "Luminosity",
     "team_rank": 18,
     "region": "EU",
     "popularity": 1.25,
     "trophies_s": 0,
     "trophies_a": 1,
-    "teamLogo": "/images/monte-logo.webp"
+    "teamLogo": "/images/luminosity-logo.webp"
   },
   {
     "name": "kakafu",
@@ -1907,19 +1914,20 @@ export const playersData: PlayerStats[] = [
     "teamLogo": "/images/faze-logo.webp"
   },
   {
-    "name": "broky",
+    "name": "JBOEN",
     "role": "AWP",
-    "age": 25,
-    "rating": 0.98,
-    "trophies": 12,
-    "majors": 7,
-    "maps": 1388,
+    "age": 20,
+    "rating": 1.20,
+    "trophies": 0,
+    "majors": 0,
+    "maps": 403,
     "team_name": "FaZe",
     "team_rank": 19,
     "region": "EU",
-    "popularity": 1.50,
-    "trophies_s": 3,
-    "trophies_a": 9,
+    "popularity": 1.15,
+    "trophies_s": 0,
+    "trophies_a": 0,
+    "previous_team_multiplier": 0.40,
     "teamLogo": "/images/faze-logo.webp"
   },
   {
@@ -1933,7 +1941,7 @@ export const playersData: PlayerStats[] = [
     "team_name": "FaZe",
     "team_rank": 19,
     "region": "EU",
-    "popularity": 1.05,
+    "popularity": 1.10,
     "trophies_s": 0,
     "trophies_a": 0,
     "teamLogo": "/images/faze-logo.webp"
@@ -1957,7 +1965,7 @@ export const playersData: PlayerStats[] = [
   {
     "name": "enkay J",
     "role": "Coach",
-    "age": 36,
+    "age": 37,
     "trophies": 0,
     "majors": 1,
     "team_name": "FaZe",
@@ -2036,13 +2044,13 @@ export const playersData: PlayerStats[] = [
     "teamLogo": "/images/3dmax-logo.webp"
   },
   {
-    "name": "Ex3rcice",
+    "name": "Kursy",
     "role": "Rifler",
-    "age": 26,
-    "rating": 0.98,
+    "age": 24,
+    "rating": 0.96,
     "trophies": 0,
-    "majors": 3,
-    "maps": 1328,
+    "majors": 0,
+    "maps": 334,
     "team_name": "3DMAX",
     "team_rank": 20,
     "region": "EU",
@@ -2279,20 +2287,21 @@ export const playersData: PlayerStats[] = [
     "teamLogo": "/images/heroic-logo.webp"
   },
   {
-    "name": "xfl0ud",
-    "role": "Rifler",
-    "age": 23,
-    "rating": 1.08,
-    "trophies": 0,
-    "majors": 3,
-    "maps": 948,
-    "team_name": "HEROIC",
-    "team_rank": 23,
+    "name": "Brollan",
+    "role": "IGL",
+    "age": 24,
+    "rating": 0.99,
+    "trophies": 5,
+    "majors": 9,
+    "maps": 1609,
+    "team_name": "MOUZ",
+    "team_rank": 6,
     "region": "EU",
-    "popularity": 1.15,
+    "popularity": 1.30,
     "trophies_s": 0,
-    "trophies_a": 0,
-    "teamLogo": "/images/heroic-logo.webp"
+    "trophies_a": 5,
+    "teamLogo": "/images/mouz-logo.webp",
+    "is_bench": true
   },
   {
     "name": "nilo",
@@ -2327,19 +2336,20 @@ export const playersData: PlayerStats[] = [
     "teamLogo": "/images/heroic-logo.webp"
   },
   {
-    "name": "yxngstxr",
+    "name": "MartinezSA",
     "role": "AWP",
-    "age": 21,
-    "rating": 1.00,
+    "age": 25,
+    "rating": 1.16,
     "trophies": 0,
     "majors": 2,
-    "maps": 634,
+    "maps": 766,
     "team_name": "HEROIC",
     "team_rank": 23,
     "region": "EU",
     "popularity": 1.20,
     "trophies_s": 0,
     "trophies_a": 0,
+    "previous_team_multiplier": 0.75,
     "teamLogo": "/images/heroic-logo.webp"
   },
   {
@@ -2454,6 +2464,7 @@ export const playersData: PlayerStats[] = [
     "popularity": 1.00,
     "trophies_s": 0,
     "trophies_a": 0,
+    "previous_team_multiplier": 0.60,
     "teamLogo": "/images/nip-logo.webp"
   },
   {
@@ -2761,7 +2772,7 @@ export const playersData: PlayerStats[] = [
     "team_name": "Liquid",
     "team_rank": 27,
     "region": "EU",
-    "popularity": 1.30,
+    "popularity": 1.35,
     "trophies_s": 1,
     "trophies_a": 2,
     "teamLogo": "/images/liquid-logo.webp"
@@ -2780,6 +2791,24 @@ export const playersData: PlayerStats[] = [
     "popularity": 1.15,
     "trophies_s": 0,
     "trophies_a": 0,
+    "is_bench": true,
+    "teamLogo": "/images/liquid-logo.webp"
+},
+{
+    "name": "Jorko",
+    "role": "AWP",
+    "age": 17,
+    "rating": 1.07,
+    "trophies": 0,
+    "majors": 0,
+    "maps": 281,
+    "team_name": "Liquid",
+    "team_rank": 27,
+    "region": "EU",
+    "popularity": 1.05,
+    "trophies_s": 0,
+    "trophies_a": 0,
+    "previous_team_multiplier": 0.65,
     "teamLogo": "/images/liquid-logo.webp"
   },
   {

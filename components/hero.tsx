@@ -258,13 +258,17 @@ export function Hero() {
                 width={900}
                 height={900}
                 priority
-                className="relative z-[1] h-auto w-full scale-110 object-contain [filter:drop-shadow(0_0_14px_hsl(var(--primary)/0.9))_drop-shadow(0_0_36px_hsl(var(--primary)/0.6))]"
+                className={`relative z-[1] h-auto w-full scale-110 object-contain transition-opacity duration-500 [filter:drop-shadow(0_0_14px_hsl(var(--primary)/0.9))_drop-shadow(0_0_36px_hsl(var(--primary)/0.6))] ${
+  featuredPlayer ? "opacity-100" : "opacity-0"
+}`}
               />
               <div className="pointer-events-none absolute inset-x-0 -bottom-1 z-[2] h-24 bg-gradient-to-t from-background to-transparent" />
             </div>
 
             {/* КАРТОЧКА ИГРОКА */}
-            <div className="group/card relative z-10 -mt-6 rounded-xl border border-primary/40 bg-background/75 p-5 backdrop-blur-md box-glow transition-all duration-300">
+            <div className={`group/card relative z-10 -mt-6 rounded-xl border border-primary/40 bg-background/75 p-5 backdrop-blur-md box-glow transition-all duration-500 ${
+  featuredPlayer ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+}`}>
               
               {/* ПЛАШКА С ДИНАМИКОЙ */}
               <div className="pointer-events-none absolute bottom-full left-1/2 mb-3 w-[265px] -translate-x-1/2 rounded-lg border border-primary/40 bg-background/95 p-3 opacity-0 translate-y-2 scale-95 shadow-2xl transition-all duration-300 ease-out group-hover/card:pointer-events-auto group-hover/card:translate-y-0 group-hover/card:scale-100 group-hover/card:opacity-100 backdrop-blur-md z-30 box-glow">
@@ -301,7 +305,7 @@ export function Hero() {
                       d={featuredPlayer ? featuredPlayer.graphPath : "M 12,62 L 29,56 L 46,70 L 63,52 L 81,34 L 100,46"}
                       fill="none"
                       stroke="#ff7a00"
-                      strokeWidth="2"
+                      strokeWidth="1"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
